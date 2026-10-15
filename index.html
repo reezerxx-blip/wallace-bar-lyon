@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wallace Bar · Pub écossais et whisky bar du Vieux-Lyon depuis 2005</title>
+  <meta name="description" content="Wallace Bar, pub d'inspiration écossaise au 2 rue Octavio Mey, Vieux-Lyon (Saint-Paul). Plus de 200 whiskies, 30 gins, cocktails, 16 bières pression, quiz le lundi, live le vendredi, terrasse.">
+  <meta name="theme-color" content="#141110">
+  <!-- URL canonique et URLs absolues Open Graph à renseigner une fois le domaine (ou l'URL GitHub Pages) connu -->
+  <link rel="canonical" href="https://reezerxx-blip.github.io/wallace-bar-lyon/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Wallace Bar · Le QG écossais du Vieux-Lyon">
+  <meta property="og:description" content="200 whiskies, 30 gins, 16 tireuses, le quiz du lundi et le live du vendredi. 2 rue Octavio Mey, Lyon 5e.">
+  <meta property="og:url" content="https://reezerxx-blip.github.io/wallace-bar-lyon/">
+  <!-- og:image doit être une URL absolue : remplacer par https://<domaine>/assets/img/hero-1600.webp -->
+  <meta property="og:image" content="https://reezerxx-blip.github.io/wallace-bar-lyon/assets/img/hero-1600.webp">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-640.webp 640w, assets/img/hero-1024.webp 1024w, assets/img/hero-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/fraunces/v38/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58njr1Yc7qv8.woff2" crossorigin>
+  <!-- Fraunces limité : opsz figé à 144, graisses 300 à 600 (romain) et 300 à 500 (italique). DM Sans sans italique. -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..600&family=Fraunces:ital,opsz,wght@0,144,300..600;1,144,300..500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    /* Intro de marque : uniquement à la première visite, desktop, sans mouvement réduit */
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!rm && window.innerWidth >= 768 && !window.sessionStorage.getItem('wallaceSeen')) {
+          d.classList.add('has-intro');
+          window.sessionStorage.setItem('wallaceSeen', '1');
+        }
+      } catch (e) { /* stockage indisponible : pas d'intro */ }
+    })();
+  </script>
+
+  <!-- Horaires PROVISOIRES, à confirmer par le client (même source que HOURS dans main.js). Coordonnées géo approximatives. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BarOrPub",
+    "name": "Wallace Bar",
+    "description": "Pub d'inspiration écossaise dans le Vieux-Lyon depuis 2005 : plus de 200 whiskies, 30 gins, cocktails, 16 bières pression et planches à partager.",
+    "url": "https://reezerxx-blip.github.io/wallace-bar-lyon/",
+    "image": "https://reezerxx-blip.github.io/wallace-bar-lyon/assets/img/hero-1600.webp",
+    "telephone": "+33 4 72 00 23 91",
+    "priceRange": "8 € - 20 €",
+    "servesCuisine": ["Pub", "Planches à partager"],
+    "hasMenu": "https://reezerxx-blip.github.io/wallace-bar-lyon/#carte",
+    "foundingDate": "2005",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2 rue Octavio Mey",
+      "addressLocality": "Lyon",
+      "postalCode": "69005",
+      "addressRegion": "Auvergne-Rhône-Alpes",
+      "addressCountry": "FR"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 45.7636, "longitude": 4.8273 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "11:00", "closes": "00:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "11:00", "closes": "02:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:00", "closes": "00:30" }
+    ],
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Terrasse", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Musique live le vendredi", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Quiz le lundi", "value": true }
+    ]
+  }
+  </script>
+  <!-- Ajouter "sameAs": ["https://www.instagram.com/...", "https://www.facebook.com/..."] dès que les comptes réels sont fournis -->
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- Monogramme : un W formé de deux V croisés, clin d'œil discret au sautoir écossais.
+       Icônes de flèches et téléphone : Heroicons (MIT, Tailwind Labs). -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="mono" viewBox="0 0 39 32">
+      <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3 L12 29 L22 3"/>
+        <path d="M17 3 L27 29 L37 3"/>
+      </g>
+    </symbol>
+    <symbol id="i-up-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></symbol>
+  </svg>
+
+  <!-- Intro de marque (≤ 0.8 s, première visite) -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro__inner">
+      <svg class="intro__mono" viewBox="0 0 39 32"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path class="intro__stroke" d="M2 3 L12 29 L22 3"/><path class="intro__stroke" d="M17 3 L27 29 L37 3"/></g></svg>
+      <span class="intro__word"><span>Wallace</span></span>
+    </div>
+  </div>
+
+  <!-- Curseur custom (desktop) -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"><span class="cursor__label">Voir</span></span></div>
+
+  <!-- S3 · Jauge "Santé." : le verre se remplit au fil du scroll (desktop, après le hero) -->
+  <div class="gauge" aria-hidden="true">
+    <span class="gauge__glass"><span class="gauge__liquid"></span></span>
+    <span class="gauge__label">Santé</span>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#top" aria-label="Wallace Bar, retour en haut">
+      <svg class="nav__mono" aria-hidden="true"><use href="#mono"/></svg>
+      <span class="nav__logo-word">Wallace</span><span class="nav__logo-sub">Saint-Paul · Lyon 5</span>
+    </a>
+    <nav class="nav__links" aria-label="Navigation principale">
+      <a href="#carte">La carte</a>
+      <a href="#semaine">La semaine</a>
+      <a href="#ambiances">Ambiances</a>
+      <a href="#festivals">Festivals</a>
+      <a href="#infos">Infos</a>
+    </nav>
+    <div class="nav__right">
+      <span class="status status--compact" data-status><span class="status__dot"></span><span class="status__label">Horaires</span></span>
+      <a class="btn btn--amber btn--sm magnetic" href="https://www.google.com/maps/dir/?api=1&amp;destination=Wallace+Bar+2+rue+Octavio+Mey+69005+Lyon" target="_blank" rel="noopener">
+        <span class="btn__text">Itinéraire</span>
+        <span class="btn__icon" aria-hidden="true"><svg width="16" height="16"><use href="#i-up-right"/></svg></span>
+      </a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menu mobile plein écran -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__bg"></div>
+    <nav class="menu__inner" aria-label="Menu mobile">
+      <ul class="menu__list">
+        <li><a href="#manifeste"><span class="menu__num">01</span><span class="menu__word">Le manifeste</span></a></li>
+        <li><a href="#carte"><span class="menu__num">02</span><span class="menu__word">La carte</span></a></li>
+        <li><a href="#semaine"><span class="menu__num">03</span><span class="menu__word">La semaine</span></a></li>
+        <li><a href="#ambiances"><span class="menu__num">04</span><span class="menu__word">Ambiances</span></a></li>
+        <li><a href="#festivals"><span class="menu__num">05</span><span class="menu__word">Festivals</span></a></li>
+        <li><a href="#infos"><span class="menu__num">06</span><span class="menu__word">Infos & accès</span></a></li>
+      </ul>
+      <div class="menu__foot">
+        <a class="btn btn--amber menu__cta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Wallace+Bar+2+rue+Octavio+Mey+69005+Lyon" target="_blank" rel="noopener">
+          <span class="btn__text">Itinéraire</span>
+          <span class="btn__icon" aria-hidden="true"><svg width="16" height="16"><use href="#i-up-right"/></svg></span>
+        </a>
+        <a href="tel:+33472002391" class="menu__tel">04 72 00 23 91</a>
+        <p>2 rue Octavio Mey, 69005 Lyon</p>
+        <span class="status" data-status><span class="status__dot"></span><span class="status__label">Horaires</span></span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Barre d'action mobile (apparaît après le hero) -->
+  <div class="dock" id="dock" aria-label="Actions rapides">
+    <span class="dock__status" data-status data-short><span class="status__dot"></span><span class="status__label">Horaires</span></span>
+    <a class="dock__btn dock__btn--amber" href="https://www.google.com/maps/dir/?api=1&amp;destination=Wallace+Bar+2+rue+Octavio+Mey+69005+Lyon" target="_blank" rel="noopener">Itinéraire</a>
+    <a class="dock__btn" href="tel:+33472002391">Appeler</a>
+  </div>
+
+  <main id="contenu" class="page">
+
+    <!-- HERO · S1 "La lanterne" -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__media" id="lantern">
+        <!-- remplacer par photo réelle du bar (priorité n°1 du shooting) -->
+        <picture>
+          <source type="image/webp" srcset="assets/img/hero-640.webp 640w, assets/img/hero-1024.webp 1024w, assets/img/hero-1600.webp 1600w" sizes="100vw">
+          <img class="hero__img hero__img--base" src="assets/img/hero-1600.webp" width="2000" height="1333" fetchpriority="high" decoding="async"
+               alt="Silhouettes de clients accoudés au comptoir, devant les étagères de bouteilles éclairées d'une lumière ambrée">
+        </picture>
+        <div class="hero__lamp" aria-hidden="true">
+          <picture>
+            <source type="image/webp" srcset="assets/img/hero-640.webp 640w, assets/img/hero-1024.webp 1024w, assets/img/hero-1600.webp 1600w" sizes="100vw">
+            <img class="hero__img hero__img--warm" src="assets/img/hero-1600.webp" width="2000" height="1333" alt="" decoding="async">
+          </picture>
+        </div>
+        <div class="hero__wash"></div>
+      </div>
+
+      <p class="hero__coords" aria-hidden="true">45.7636° N · 4.8273° E · Saint-Paul</p>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow"><span class="eyebrow" id="heroEyebrow">Pub écossais · Vieux-Lyon<span class="eyebrow__more"> · depuis 2005</span></span></p>
+        <h1 class="hero__title" id="hero-title" aria-label="Wallace Bar, pub écossais et whisky bar du Vieux-Lyon">
+          <span class="hero__word" data-split-chars aria-hidden="true">Wallace</span>
+        </h1>
+        <div class="hero__bottom">
+          <p class="hero__tagline">Un dram, une pinte, une rue qui ne dort pas. <em>Le whisky a son adresse dans le Vieux-Lyon.</em></p>
+          <div class="hero__actions">
+            <div class="hero__live">
+              <span class="status status--hero" data-status aria-live="polite"><span class="status__dot"></span><span class="status__label">Horaires</span></span>
+              <!-- Horaires des animations à confirmer par le client -->
+              <p class="hero__tonight" id="tonight"></p>
+            </div>
+            <div class="hero__ctas">
+              <a class="btn btn--amber magnetic" href="https://www.google.com/maps/dir/?api=1&amp;destination=Wallace+Bar+2+rue+Octavio+Mey+69005+Lyon" target="_blank" rel="noopener">
+                <span class="btn__text">Itinéraire</span>
+                <span class="btn__icon" aria-hidden="true"><svg width="16" height="16"><use href="#i-up-right"/></svg></span>
+              </a>
+              <a class="btn btn--ghost magnetic" href="tel:+33472002391">
+                <span class="btn__text">Appeler</span>
+                <span class="btn__icon" aria-hidden="true"><svg width="16" height="16"><use href="#i-phone"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee (unique) -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" data-marquee>
+        <div class="marquee__group">
+          <span>Whiskies</span><svg class="marquee__mono"><use href="#mono"/></svg><span class="it">Gins</span><svg class="marquee__mono"><use href="#mono"/></svg><span>Cocktails</span><svg class="marquee__mono"><use href="#mono"/></svg><span class="it">Pressions</span><svg class="marquee__mono"><use href="#mono"/></svg><span>Quiz du lundi</span><svg class="marquee__mono"><use href="#mono"/></svg><span class="it">Live du vendredi</span><svg class="marquee__mono"><use href="#mono"/></svg><span>Terrasse</span><svg class="marquee__mono"><use href="#mono"/></svg>
+        </div>
+        <div class="marquee__group">
+          <span>Whiskies</span><svg class="marquee__mono"><use href="#mono"/></svg><span class="it">Gins</span><svg class="marquee__mono"><use href="#mono"/></svg><span>Cocktails</span><svg class="marquee__mono"><use href="#mono"/></svg><span class="it">Pressions</span><svg class="marquee__mono"><use href="#mono"/></svg><span>Quiz du lundi</span><svg class="marquee__mono"><use href="#mono"/></svg><span class="it">Live du vendredi</span><svg class="marquee__mono"><use href="#mono"/></svg><span>Terrasse</span><svg class="marquee__mono"><use href="#mono"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANIFESTE -->
+    <section class="manifesto" id="manifeste" aria-labelledby="manifesto-title">
+      <div class="manifesto__year" aria-hidden="true">2005</div>
+      <div class="container manifesto__pin">
+        <p class="eyebrow">Le manifeste</p>
+        <h2 class="visually-hidden" id="manifesto-title">Le manifeste du Wallace</h2>
+        <p class="manifesto__text" data-scrub-words>
+          Depuis 2005, au 2 rue Octavio Mey, on sert le Vieux-Lyon
+          <span class="pill-img ph" aria-hidden="true"><!-- Wikimedia Commons, Romainbehar, CC0 (recadré) --><picture><source type="image/webp" srcset="assets/img/pill-plaque-320.webp 320w, assets/img/pill-plaque-640.webp 560w" sizes="200px"><img src="assets/img/pill-plaque-320.webp" alt="" width="560" height="200" loading="lazy" decoding="async"></picture></span>
+          comme on reçoit des amis&nbsp;: un verre juste, une lumière basse, des pavés qui résonnent jusque tard.
+          <span class="pill-img ph" aria-hidden="true"><!-- remplacer par photo réelle du bar --><picture><source type="image/webp" srcset="assets/img/pill-whisky-320.webp 320w, assets/img/pill-whisky-640.webp 640w" sizes="200px"><img src="assets/img/pill-whisky-320.webp" alt="" width="800" height="534" loading="lazy" decoding="async"></picture></span>
+          On vient pour un dram, on reste pour la soirée. Et quand la rue s'embrase, c'est ici qu'elle se donne rendez-vous.
+        </p>
+        <p class="manifesto__sign"><span class="rule-mark" aria-hidden="true"></span><span class="mono">L'équipe du Wallace</span></p>
+      </div>
+    </section>
+
+    <!-- LA CAVE : chiffres intégrés dans une phrase -->
+    <section class="cellar" aria-labelledby="cellar-title">
+      <div class="container">
+        <p class="eyebrow">La cave</p>
+        <h2 class="cellar__text" id="cellar-title" data-reveal-words>
+          <b class="num" data-count="200">200</b> whiskies, <b class="num" data-count="30">30</b> gins, <b class="num" data-count="16">16</b> tireuses, et une seule adresse depuis <b class="num num--year" data-count="2005" data-count-from="1990">2005</b>.
+        </h2>
+      </div>
+    </section>
+
+    <!-- LA CARTE -->
+    <!-- PRIX INDICATIFS · à confirmer par le client avant mise en ligne -->
+    <section class="carte section" id="carte" aria-labelledby="carte-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker"><span class="kicker__num">01</span><span class="kicker__sep">/</span><span>La carte</span></p>
+          <h2 class="h2 h2--rule" id="carte-title"><span data-reveal-words>Deux cents whiskies. Et tout le reste.</span><span class="h2__rule" aria-hidden="true"></span></h2>
+        </header>
+
+        <div class="tabs" data-tabs>
+          <div class="tabs__list" role="tablist" aria-label="Catégories de la carte">
+            <button class="tabs__tab" role="tab" id="tab-whisky" aria-controls="panel-whisky" aria-selected="true" tabindex="0">Whiskies</button>
+            <button class="tabs__tab" role="tab" id="tab-gin" aria-controls="panel-gin" aria-selected="false" tabindex="-1">Gins</button>
+            <button class="tabs__tab" role="tab" id="tab-cocktail" aria-controls="panel-cocktail" aria-selected="false" tabindex="-1">Cocktails</button>
+            <button class="tabs__tab" role="tab" id="tab-biere" aria-controls="panel-biere" aria-selected="false" tabindex="-1">Pressions</button>
+            <button class="tabs__tab" role="tab" id="tab-food" aria-controls="panel-food" aria-selected="false" tabindex="-1">À partager</button>
+            <span class="tabs__ink" aria-hidden="true"></span>
+          </div>
+
+          <!-- Panneaux empilés dans une seule cellule : la hauteur de la section ne change jamais -->
+          <div class="tabs__panels">
+            <!-- Whiskies · S2 carte des saveurs -->
+            <div class="tabs__panel is-active" role="tabpanel" id="panel-whisky" aria-labelledby="tab-whisky" tabindex="0">
+              <div class="tabs__aside">
+                <figure class="tabs__media flavour ph" role="group" aria-label="Carte des saveurs : du léger au riche, du fruité au tourbé">
+                  <!-- remplacer par photo réelle du bar -->
+                  <picture><img class="flavour__bg" src="assets/img/flavour-bg-640.webp" alt="" width="1200" height="795" loading="lazy" decoding="async"></picture>
+                  <div class="flavour__map">
+                    <p class="flavour__title">Trouvez votre dram</p>
+                    <span class="flavour__axis flavour__axis--x" aria-hidden="true"></span>
+                    <span class="flavour__axis flavour__axis--y" aria-hidden="true"></span>
+                    <span class="flavour__lbl flavour__lbl--l" aria-hidden="true">Léger</span>
+                    <span class="flavour__lbl flavour__lbl--r" aria-hidden="true">Riche</span>
+                    <span class="flavour__lbl flavour__lbl--t" aria-hidden="true">Tourbé</span>
+                    <span class="flavour__lbl flavour__lbl--b" aria-hidden="true">Fruité</span>
+                    <div class="flavour__dots" id="flavourDots"></div>
+                  </div>
+                </figure>
+                <div class="flavour__card" id="flavourCard" aria-live="polite">
+                  <span class="flavour__card-name">Talisker 10 ans</span>
+                  <span class="flavour__card-meta">Île de Skye · poivre, embruns, fumée</span>
+                  <span class="flavour__card-price">11 € · 4 cl</span>
+                  <span class="flavour__hint" id="flavourHint">Survolez un point de la carte</span>
+                </div>
+              </div>
+              <div class="tabs__content">
+                <p class="tabs__intro">Plus de deux cents références. Tourbés, fruités, iodés&nbsp;: dites-nous ce que vous aimez, on vous trouve le dram.</p>
+                <ul class="items" id="whiskyList">
+                  <li class="item" data-x="0.18" data-y="0.06" data-region="Highlands"><span class="item__name">Glenmorangie Original</span><span class="item__dots"></span><span class="item__price">9 €</span><span class="item__note">Highlands · agrumes, vanille, pêche</span></li>
+                  <li class="item" data-x="0.28" data-y="0.14" data-region="Speyside"><span class="item__name">Glenfiddich 12 ans</span><span class="item__dots"></span><span class="item__price">9 €</span><span class="item__note">Speyside · poire, miel, chêne doux</span></li>
+                  <li class="item" data-x="0.82" data-y="0.18" data-region="Speyside"><span class="item__name">Macallan 12 ans Sherry Oak</span><span class="item__dots"></span><span class="item__price">14 €</span><span class="item__note">Speyside · fruits secs, xérès, épices</span></li>
+                  <li class="item" data-x="0.5" data-y="0.38" data-region="Highlands de l'Ouest"><span class="item__name">Oban 14 ans</span><span class="item__dots"></span><span class="item__price">13 €</span><span class="item__note">Highlands de l'Ouest · agrumes, sel, malt</span></li>
+                  <li class="item" data-x="0.58" data-y="0.66" data-region="Île de Skye" data-default><span class="item__name">Talisker 10 ans</span><span class="item__dots"></span><span class="item__price">11 €</span><span class="item__note">Île de Skye · poivre, embruns, fumée</span></li>
+                  <li class="item" data-x="0.66" data-y="0.94" data-region="Islay"><span class="item__name">Laphroaig 10 ans</span><span class="item__dots"></span><span class="item__price">11 €</span><span class="item__note">Islay · tourbe médicinale, algues</span></li>
+                  <li class="item" data-x="0.9" data-y="0.84" data-region="Islay"><span class="item__name">Lagavulin 16 ans</span><span class="item__dots"></span><span class="item__price">15 €</span><span class="item__note">Islay · tourbe profonde, fruits secs</span></li>
+                  <li class="item"><span class="item__name">Le dram du mois</span><span class="item__dots"></span><span class="item__price">10 à 20 €</span><span class="item__note">Une bouteille rare, choisie au comptoir</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Gins -->
+            <div class="tabs__panel" role="tabpanel" id="panel-gin" aria-labelledby="tab-gin" tabindex="0" inert>
+              <figure class="tabs__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/gin-480.webp 480w, assets/img/gin-960.webp 960w" sizes="(min-width: 900px) 40vw, 100vw"><img src="assets/img/gin-960.webp" alt="Barman déposant une garniture botanique sur un verre, sous des ampoules chaudes" width="1600" height="2400" loading="lazy" decoding="async"></picture>
+                <figcaption class="mono">5 cl · tonic premium</figcaption>
+              </figure>
+              <div class="tabs__content">
+                <p class="tabs__intro">Une trentaine de gins, chacun avec son tonic et sa garniture. Le gin tonic, version soignée.</p>
+                <ul class="items">
+                  <li class="item"><span class="item__name">Citadelle</span><span class="item__dots"></span><span class="item__price">10 €</span><span class="item__note">France · genièvre, zeste de citron</span></li>
+                  <li class="item"><span class="item__name">Hendrick's</span><span class="item__dots"></span><span class="item__price">11 €</span><span class="item__note">Écosse · concombre, rose</span></li>
+                  <li class="item"><span class="item__name">The Botanist</span><span class="item__dots"></span><span class="item__price">12 €</span><span class="item__note">Islay · 22 plantes de l'île</span></li>
+                  <li class="item"><span class="item__name">Monkey 47</span><span class="item__dots"></span><span class="item__price">14 €</span><span class="item__note">Forêt-Noire · poivré, boisé, airelle</span></li>
+                  <li class="item"><span class="item__name">Le gin du moment</span><span class="item__dots"></span><span class="item__price">10 à 13 €</span><span class="item__note">Demandez la découverte de la semaine</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Cocktails -->
+            <div class="tabs__panel" role="tabpanel" id="panel-cocktail" aria-labelledby="tab-cocktail" tabindex="0" inert>
+              <figure class="tabs__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/cocktail-480.webp 480w, assets/img/cocktail-960.webp 960w" sizes="(min-width: 900px) 40vw, 100vw"><img src="assets/img/cocktail-960.webp" alt="Cocktail sombre garni d'agrumes séchés et de mûres sur une planche en bois" width="1600" height="1167" loading="lazy" decoding="async"></picture>
+                <figcaption class="mono">Classiques et signatures maison</figcaption>
+              </figure>
+              <div class="tabs__content">
+                <p class="tabs__intro">Des classiques tenus droits, quelques signatures maison, et le whisky souvent en premier rôle.</p>
+                <ul class="items">
+                  <li class="item"><span class="item__name">Le Wallace</span><span class="item__dots"></span><span class="item__price">12 €</span><span class="item__note">Blended scotch, miel de bruyère, citron, bitter</span></li>
+                  <li class="item"><span class="item__name">Penicillin</span><span class="item__dots"></span><span class="item__price">13 €</span><span class="item__note">Scotch, gingembre, miel, float d'Islay</span></li>
+                  <li class="item"><span class="item__name">Old Fashioned</span><span class="item__dots"></span><span class="item__price">12 €</span><span class="item__note">Bourbon, sucre, angostura, zeste d'orange</span></li>
+                  <li class="item"><span class="item__name">Saint-Paul Spritz</span><span class="item__dots"></span><span class="item__price">11 €</span><span class="item__note">Gin, liqueur de sureau, prosecco, soda</span></li>
+                  <li class="item"><span class="item__name">Highland Mule</span><span class="item__dots"></span><span class="item__price">11 €</span><span class="item__note">Scotch, citron vert, ginger beer</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Pressions -->
+            <div class="tabs__panel" role="tabpanel" id="panel-biere" aria-labelledby="tab-biere" tabindex="0" inert>
+              <figure class="tabs__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/pression-480.webp 480w, assets/img/pression-960.webp 960w" sizes="(min-width: 900px) 40vw, 100vw"><img src="assets/img/pression-960.webp" alt="Bière ambrée tirée à la pression dans un verre" width="1600" height="1067" loading="lazy" decoding="async"></picture>
+                <figcaption class="mono">Prix à la pinte · demi possible</figcaption>
+              </figure>
+              <div class="tabs__content">
+                <p class="tabs__intro">Seize tireuses, des incontournables et des invitées qui tournent. La pinte, comme il se doit.</p>
+                <ul class="items">
+                  <li class="item"><span class="item__name">Stout irlandais</span><span class="item__dots"></span><span class="item__price">8,50 €</span><span class="item__note">Torréfié, crémeux, la mousse qui tient</span></li>
+                  <li class="item"><span class="item__name">Scotch ale</span><span class="item__dots"></span><span class="item__price">8,50 €</span><span class="item__note">Maltée, caramel, chaleur écossaise</span></li>
+                  <li class="item"><span class="item__name">IPA de saison</span><span class="item__dots"></span><span class="item__price">8 €</span><span class="item__note">Houblons en rotation, amertume nette</span></li>
+                  <li class="item"><span class="item__name">Blonde de la brasserie locale</span><span class="item__dots"></span><span class="item__price">7,50 €</span><span class="item__note">Brassée dans la région lyonnaise</span></li>
+                  <li class="item"><span class="item__name">Cidre brut</span><span class="item__dots"></span><span class="item__price">7,50 €</span><span class="item__note">Sec, pommes acidulées</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- À partager -->
+            <div class="tabs__panel" role="tabpanel" id="panel-food" aria-labelledby="tab-food" tabindex="0" inert>
+              <figure class="tabs__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/food-480.webp 480w, assets/img/food-960.webp 960w" sizes="(min-width: 900px) 40vw, 100vw"><img src="assets/img/food-960.webp" alt="Burger et frites maison sur une planche en bois, fond sombre" width="1600" height="1067" loading="lazy" decoding="async"></picture>
+                <figcaption class="mono">Au comptoir ou en terrasse</figcaption>
+              </figure>
+              <div class="tabs__content">
+                <p class="tabs__intro">De quoi tenir la soirée. Des assiettes généreuses, faites pour circuler autour de la table.</p>
+                <ul class="items">
+                  <li class="item"><span class="item__name">Planche mixte</span><span class="item__dots"></span><span class="item__price">18 €</span><span class="item__note">Charcuteries et fromages, pain grillé</span></li>
+                  <li class="item"><span class="item__name">Le burger du Wallace</span><span class="item__dots"></span><span class="item__price">16 €</span><span class="item__note">Cheddar affiné, oignons au whisky, frites maison</span></li>
+                  <li class="item"><span class="item__name">Fish & chips</span><span class="item__dots"></span><span class="item__price">15 €</span><span class="item__note">Cabillaud en pâte à la bière, sauce tartare</span></li>
+                  <li class="item"><span class="item__name">Scotch eggs</span><span class="item__dots"></span><span class="item__price">9 €</span><span class="item__note">Les trois, moutarde à l'ancienne</span></li>
+                  <li class="item"><span class="item__name">Frites maison</span><span class="item__dots"></span><span class="item__price">8 €</span><span class="item__note">Sauce poivre au whisky</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="note mono">Prix indicatifs. La carte complète des 200 whiskies vous attend au comptoir.</p>
+      </div>
+    </section>
+
+    <!-- LA SEMAINE -->
+    <!-- Horaires des animations à confirmer par le client -->
+    <section class="week" id="semaine" aria-labelledby="semaine-title">
+      <div class="week__pin">
+        <header class="week__head container">
+          <p class="kicker"><span class="kicker__num">02</span><span class="kicker__sep">/</span><span>La semaine</span></p>
+          <h2 class="h2" id="semaine-title"><span data-reveal-words>Une semaine,</span> <span class="h2__big" data-reveal-words>cinq humeurs.</span></h2>
+        </header>
+        <div class="week__viewport" data-cursor="Défiler">
+          <ol class="week__track">
+            <li class="day day--feature">
+              <div class="day__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/day-lundi-480.webp 480w, assets/img/day-lundi-960.webp 960w" sizes="(min-width: 1024px) 34vw, 46vw"><img src="assets/img/day-lundi-960.webp" alt="Intérieur de pub chaleureux, comptoir en bois et suspensions" width="1200" height="900" loading="lazy" decoding="async"></picture>
+              </div>
+              <div class="day__body">
+                <span class="day__name mono">Lundi</span>
+                <h3 class="day__title">Le Quiz</h3>
+                <p>Équipes, ardoises et mauvaise foi bienveillante. Le meilleur moyen de commencer la semaine.</p>
+              </div>
+            </li>
+            <li class="day">
+              <div class="day__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/day-afterwork-480.webp 480w, assets/img/day-afterwork-960.webp 960w" sizes="(min-width: 1024px) 26vw, 46vw"><img src="assets/img/day-afterwork-960.webp" alt="Bière versée au comptoir, à côté d'une corbeille de pain" width="1200" height="800" loading="lazy" decoding="async"></picture>
+              </div>
+              <div class="day__body">
+                <span class="day__name mono">Mardi au jeudi</span>
+                <h3 class="day__title">L'after-work</h3>
+                <p>Premier verre en fin de journée, puis on se laisse glisser vers le soir.</p>
+              </div>
+            </li>
+            <li class="day day--feature">
+              <div class="day__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/day-live-480.webp 480w, assets/img/day-live-960.webp 960w" sizes="(min-width: 1024px) 34vw, 46vw"><img src="assets/img/day-live-960.webp" alt="Gros plan sur un musicien jouant de la guitare acoustique dans une lumière chaude" width="1200" height="800" loading="lazy" decoding="async"></picture>
+              </div>
+              <div class="day__body">
+                <span class="day__name mono">Vendredi</span>
+                <h3 class="day__title">Le Live</h3>
+                <p>Des musiciens dans un coin du bar, le son qui déborde sur la rue. Ouvert jusqu'à 2h30.</p>
+              </div>
+            </li>
+            <li class="day">
+              <div class="day__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/day-samedi-480.webp 480w, assets/img/day-samedi-960.webp 960w" sizes="(min-width: 1024px) 26vw, 46vw"><img src="assets/img/day-samedi-960.webp" alt="Deux verres qui trinquent devant un mur de bouteilles" width="1200" height="1800" loading="lazy" decoding="async"></picture>
+              </div>
+              <div class="day__body">
+                <span class="day__name mono">Samedi</span>
+                <h3 class="day__title">La grande soirée</h3>
+                <p>Le Vieux-Lyon au complet et le comptoir comme point de ralliement, jusqu'à 2h30.</p>
+              </div>
+            </li>
+            <li class="day">
+              <div class="day__media ph">
+                <!-- remplacer par photo réelle du bar -->
+                <picture><source type="image/webp" srcset="assets/img/day-dimanche-480.webp 480w, assets/img/day-dimanche-960.webp 960w" sizes="(min-width: 1024px) 26vw, 46vw"><img src="assets/img/day-dimanche-960.webp" alt="Cocktail ambré garni de romarin sur un comptoir sombre" width="1200" height="800" loading="lazy" decoding="async"></picture>
+              </div>
+              <div class="day__body">
+                <span class="day__name mono">Dimanche</span>
+                <h3 class="day__title">Le dimanche lent</h3>
+                <p>Une pinte, une planche, l'étage pour soi. On rallonge le week-end sans se presser.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEUX AMBIANCES -->
+    <section class="moods section" id="ambiances" aria-labelledby="ambiances-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker"><span class="kicker__num">03</span><span class="kicker__sep">/</span><span>Deux ambiances</span></p>
+          <h2 class="h2 h2--rule" id="ambiances-title"><span data-reveal-words>Dehors les pavés. Là-haut, le calme.</span><span class="h2__rule" aria-hidden="true"></span></h2>
+        </header>
+        <div class="moods__grid">
+          <article class="mood mood--terrace">
+            <div class="mood__media ph" data-cursor="La terrasse">
+              <!-- Wikimedia Commons, Jean Claude Caro, CC BY-SA 3.0 · remplacer par photo réelle du bar -->
+              <picture><source type="image/webp" srcset="assets/img/terrasse-640.webp 640w, assets/img/terrasse-1024.webp 1024w, assets/img/terrasse-1600.webp 1600w" sizes="(min-width: 900px) 56vw, 100vw"><img data-parallax src="assets/img/terrasse-1024.webp" alt="Terrasse couverte de nuit, tables éclairées par des lampes chaudes" width="1920" height="1280" loading="lazy" decoding="async"></picture>
+            </div>
+            <div class="mood__body">
+              <span class="mood__index mono">I</span>
+              <h3 class="mood__title">La Terrasse</h3>
+              <p>Aux premières loges des pavés de Saint-Paul. On y voit passer tout le Vieux-Lyon, verre en main, des premiers beaux soirs aux nuits de festival.</p>
+            </div>
+          </article>
+          <article class="mood mood--upstairs">
+            <div class="mood__media ph" data-cursor="L'étage">
+              <!-- Wikimedia Commons, Wolfmann, CC BY-SA 4.0 (recadré) · remplacer par photo réelle de l'étage -->
+              <picture><source type="image/webp" srcset="assets/img/etage-480.webp 480w, assets/img/etage-960.webp 750w" sizes="(min-width: 900px) 40vw, 100vw"><img data-parallax src="assets/img/etage-960.webp" alt="Salon feutré aux boiseries sombres et fauteuils en cuir" width="750" height="1000" loading="lazy" decoding="async"></picture>
+            </div>
+            <div class="mood__body">
+              <span class="mood__index mono">II</span>
+              <h3 class="mood__title">L'Étage</h3>
+              <p>Plus feutré, plus calme. Pour les conversations qui comptent, les dégustations entre amis et les rendez-vous qu'on ne veut pas crier.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAISON DES FESTIVALS -->
+    <section class="fest" id="festivals" aria-labelledby="fest-title">
+      <div class="fest__media ph">
+        <!-- Wikimedia Commons, Jitrixis, CC BY-SA 4.0 -->
+        <picture><source type="image/webp" srcset="assets/img/fest-bg-960.webp 960w, assets/img/fest-bg-1600.webp 1600w" sizes="100vw"><img class="fest__img" src="assets/img/fest-bg-1600.webp" alt="Les quais de Saône illuminés un soir de Fête des Lumières, Fourvière en surplomb" width="1920" height="1280" loading="lazy" decoding="async"></picture>
+        <div class="fest__wash"></div>
+      </div>
+      <div class="fest__inner container">
+        <p class="kicker kicker--light"><span class="kicker__num">04</span><span class="kicker__sep">/</span><span>Saison des festivals</span></p>
+        <h2 class="fest__title" id="fest-title">
+          <span class="line"><span data-line>Le QG</span></span>
+          <span class="line line--indent"><span data-line><em>de la rue.</em></span></span>
+        </h2>
+        <p class="fest__lead">Quand Lyon fait la fête, la rue Octavio Mey devient la plus courue du Vieux-Lyon. Le Wallace est au milieu, portes ouvertes, tireuses prêtes.</p>
+        <!-- Dates indicatives, à vérifier chaque année. L'événement en cours (ou le prochain) passe en grand. -->
+        <ul class="fest__list" id="festList">
+          <li class="fest__item" data-event="musique">
+            <div class="fest__thumb ph">
+              <!-- Wikimedia Commons, Romainbehar, CC0 -->
+              <picture><source type="image/webp" srcset="assets/img/fest-musique-480.webp 480w, assets/img/fest-musique-960.webp 960w" sizes="(min-width: 768px) 40vw, 72vw"><img src="assets/img/fest-musique-960.webp" alt="Concert de l'Orchestre national de Lyon place des Terreaux, façade éclairée de rouge, le soir de la Fête de la musique" width="1920" height="1440" loading="lazy" decoding="async"></picture>
+            </div>
+            <span class="fest__when mono">21 juin</span>
+            <span class="fest__name">Fête de la musique</span>
+            <span class="fest__desc">La ville devient une scène, et la rue Octavio Mey n'est pas en reste.</span>
+          </li>
+          <li class="fest__item" data-event="fourviere">
+            <div class="fest__thumb ph">
+              <!-- Wikimedia Commons, AntoineM, CC BY-SA 3.0 -->
+              <picture><source type="image/webp" srcset="assets/img/fest-fourviere-480.webp 480w, assets/img/fest-fourviere-960.webp 960w" sizes="(min-width: 768px) 40vw, 72vw"><img src="assets/img/fest-fourviere-960.webp" alt="La basilique de Fourvière illuminée de nuit" width="1280" height="1280" loading="lazy" decoding="async"></picture>
+            </div>
+            <span class="fest__when mono">Juin · Juillet</span>
+            <span class="fest__name">Nuits de Fourvière</span>
+            <span class="fest__desc">Le dernier verre avant de monter la colline, le premier en redescendant.</span>
+          </li>
+          <li class="fest__item is-feature" data-event="lumieres">
+            <div class="fest__thumb ph">
+              <!-- Wikimedia Commons, Myrabella, CC BY-SA 4.0 -->
+              <picture><source type="image/webp" srcset="assets/img/fest-lumieres-480.webp 480w, assets/img/fest-lumieres-960.webp 960w" sizes="(min-width: 768px) 40vw, 72vw"><img src="assets/img/fest-lumieres-960.webp" alt="Lumignons allumés sur le rebord d'une fenêtre le 8 décembre à Lyon" width="1920" height="1280" loading="lazy" decoding="async"></picture>
+            </div>
+            <span class="fest__when mono">5 au 8 décembre</span>
+            <span class="fest__name">Fête des Lumières</span>
+            <span class="fest__desc">Quatre nuits de foule et de lumignons. Un whisky chaud pour tenir le froid.</span>
+          </li>
+        </ul>
+        <p class="fest__counter mono" aria-hidden="true"><span id="festIndex">1</span> / 3</p>
+      </div>
+      <div class="fest__names" aria-hidden="true">
+        <div class="fest__names-row" data-drift>
+          <span>Fête des Lumières</span><svg class="marquee__mono"><use href="#mono"/></svg><span class="it">Nuits de Fourvière</span><svg class="marquee__mono"><use href="#mono"/></svg><span>Fête de la musique</span><svg class="marquee__mono"><use href="#mono"/></svg><span class="it">Le QG de la rue</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIE -->
+    <section class="gallery section" aria-labelledby="gallery-title">
+      <div class="container">
+        <header class="section-head section-head--split">
+          <p class="kicker"><span class="kicker__num">05</span><span class="kicker__sep">/</span><span>Galerie</span></p>
+          <h2 class="h2 h2--solo" id="gallery-title"><span data-reveal-words>Lumière basse.</span></h2>
+        </header>
+        <div class="gallery__grid">
+          <!-- remplacer par photos réelles du bar -->
+          <figure class="g g--a"><div class="g__frame ph"><picture><source type="image/webp" srcset="assets/img/g-a-640.webp 640w, assets/img/g-a-1024.webp 1024w, assets/img/g-a-1600.webp 1600w" sizes="(min-width: 768px) 56vw, 100vw"><img data-speed="0.12" src="assets/img/g-a-1024.webp" alt="Étagères de bouteilles rétroéclairées derrière un comptoir sombre" width="1600" height="1061" loading="lazy" decoding="async"></picture></div></figure>
+          <figure class="g g--b"><div class="g__frame ph"><picture><source type="image/webp" srcset="assets/img/g-b-480.webp 480w, assets/img/g-b-960.webp 960w" sizes="(min-width: 768px) 40vw, 50vw"><img data-speed="0.2" src="assets/img/g-b-960.webp" alt="Rayonnages de bouteilles de whisky sur des étagères en bois" width="1600" height="1067" loading="lazy" decoding="async"></picture></div></figure>
+          <figure class="g g--c"><div class="g__frame ph"><!-- Wikimedia Commons, Jbureau, CC BY-SA 4.0 --><picture><source type="image/webp" srcset="assets/img/g-c-480.webp 480w, assets/img/g-c-960.webp 960w" sizes="(min-width: 768px) 32vw, 50vw"><img data-speed="0.08" src="assets/img/g-c-960.webp" alt="L'église Saint-Paul et ses façades éclairées de nuit, à deux pas du bar" width="1920" height="1504" loading="lazy" decoding="async"></picture></div></figure>
+          <figure class="g g--d"><div class="g__frame ph"><picture><source type="image/webp" srcset="assets/img/g-d-480.webp 480w, assets/img/g-d-960.webp 960w" sizes="(min-width: 768px) 24vw, 50vw"><img data-speed="0.16" src="assets/img/g-d-960.webp" alt="Cocktail posé sur un plateau en bois dans la pénombre d'un bar" width="1200" height="800" loading="lazy" decoding="async"></picture></div></figure>
+          <figure class="g g--e"><div class="g__frame ph"><picture><source type="image/webp" srcset="assets/img/g-e-480.webp 480w, assets/img/g-e-960.webp 960w" sizes="24vw"><img data-speed="0.1" src="assets/img/g-e-480.webp" alt="Verre à cocktail sur le zinc, bouteilles floues à l'arrière-plan" width="1200" height="1800" loading="lazy" decoding="async"></picture></div></figure>
+          <figure class="g g--f"><div class="g__frame ph"><picture><source type="image/webp" srcset="assets/img/g-f-480.webp 480w, assets/img/g-f-960.webp 960w" sizes="16vw"><img data-speed="0.18" src="assets/img/g-f-480.webp" alt="Bière tirée à la tireuse par une serveuse, comptoir animé" width="1200" height="800" loading="lazy" decoding="async"></picture></div></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFOS & ACCES -->
+    <section class="info section" id="infos" aria-labelledby="infos-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="kicker"><span class="kicker__num">06</span><span class="kicker__sep">/</span><span>Infos & accès</span></p>
+          <h2 class="h2 h2--rule" id="infos-title"><span data-reveal-words>La porte est ouverte.</span><span class="h2__rule" aria-hidden="true"></span></h2>
+        </header>
+        <div class="info__grid">
+          <div class="info__col">
+            <h3 class="info__label mono">Horaires</h3>
+            <!-- Rendu depuis HOURS (main.js), groupé par horaires identiques. Horaires PROVISOIRES, à confirmer par le client -->
+            <ul class="hours" id="hours">
+              <li data-days="1,2,3,4"><span>Lun → Jeu</span><span>11h · 00h30</span></li>
+              <li data-days="5,6"><span>Ven → Sam</span><span>11h · 02h30</span></li>
+              <li data-days="0"><span>Dim</span><span>11h · 00h30</span></li>
+            </ul>
+            <span class="status" data-status aria-live="polite"><span class="status__dot"></span><span class="status__label">Horaires</span></span>
+          </div>
+          <div class="info__col">
+            <h3 class="info__label mono">Adresse</h3>
+            <address class="info__address">2 rue Octavio Mey<br>69005 Lyon</address>
+            <p class="info__muted">Vieux-Lyon, quartier Saint-Paul.<br>Métro D Vieux-Lyon · gare Saint-Paul à deux pas.</p>
+            <h3 class="info__label mono">Téléphone</h3>
+            <a class="info__tel" href="tel:+33472002391">04 72 00 23 91</a>
+            <a class="info__group" href="tel:+33472002391">Réserver l'étage pour un groupe <svg width="16" height="16" aria-hidden="true"><use href="#i-right"/></svg></a>
+            <h3 class="info__label mono">Suivre</h3>
+            <ul class="socials">
+              <!-- liens réseaux à renseigner -->
+              <li><a href="#" aria-label="Instagram du Wallace Bar (lien à venir)">Instagram</a></li>
+              <li><a href="#" aria-label="Facebook du Wallace Bar (lien à venir)">Facebook</a></li>
+            </ul>
+          </div>
+          <div class="info__map">
+            <div class="info__frame">
+              <iframe title="Carte : Wallace Bar, 2 rue Octavio Mey, Lyon" src="https://www.google.com/maps?q=Wallace+Bar+2+rue+Octavio+Mey+69005+Lyon&amp;output=embed" width="600" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            </div>
+            <a class="btn btn--amber magnetic info__cta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Wallace+Bar+2+rue+Octavio+Mey+69005+Lyon" target="_blank" rel="noopener">
+              <span class="btn__text">Lancer l'itinéraire</span>
+              <span class="btn__icon" aria-hidden="true"><svg width="16" height="16"><use href="#i-up-right"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER · S3 "Santé." -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__big" aria-hidden="true">
+        <span class="footer__outline">Wallace</span>
+        <span class="footer__fill">Wallace</span>
+        <span class="footer__meniscus"></span>
+      </div>
+      <p class="footer__toast">Santé.</p>
+      <p class="footer__legal">L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+      <div class="footer__row">
+        <p class="footer__line">Pub écossais · Vieux-Lyon · depuis 2005</p>
+        <p class="footer__line"><a href="tel:+33472002391">04 72 00 23 91</a> · 2 rue Octavio Mey, 69005 Lyon</p>
+        <a class="footer__top" href="#top">Retour en haut <svg width="16" height="16" aria-hidden="true"><use href="#i-up"/></svg></a>
+      </div>
+      <details class="footer__credits">
+        <summary><span class="mono">Crédits photos</span></summary>
+        <p>Photos d'illustration Unsplash (licence Unsplash) et Wikimedia Commons, recadrées et étalonnées en CSS&nbsp;:
+          <a href="https://commons.wikimedia.org/wiki/File:Lyon_by_Night_-_Les_quais_de_Sa%C3%B4ne_la_nuit_de_la_f%C3%AAte_de_lumi%C3%A8re.JPG" target="_blank" rel="noopener">Quais de Saône, Fête des Lumières</a> par Jitrixis (<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>) ·
+          <a href="https://commons.wikimedia.org/wiki/File:Lumignons_fete_des_Lumieres_Lyon_8-12-2013.jpg" target="_blank" rel="noopener">Lumignons</a> par Myrabella (<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>) ·
+          <a href="https://commons.wikimedia.org/wiki/File:FourviereNight.jpg" target="_blank" rel="noopener">Fourvière de nuit</a> par AntoineM (<a href="https://creativecommons.org/licenses/by-sa/3.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 3.0</a>) ·
+          <a href="https://commons.wikimedia.org/wiki/File:F%C3%AAte_de_la_musique_2018_%C3%A0_Lyon_-_Place_des_Terreaux_-_Orchestre_National_de_Lyon_-_Rouge.jpg" target="_blank" rel="noopener">Fête de la musique, place des Terreaux</a> par Romainbehar (<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" target="_blank" rel="noopener">CC0</a>) ·
+          <a href="https://commons.wikimedia.org/wiki/File:SaintPaul_Lyon_de_nuit2.jpg" target="_blank" rel="noopener">Saint-Paul de nuit</a> par Jbureau (<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>) ·
+          <a href="https://commons.wikimedia.org/wiki/File:Terrasse_de_nuit.JPG" target="_blank" rel="noopener">Terrasse de nuit</a> par Jean Claude Caro (<a href="https://creativecommons.org/licenses/by-sa/3.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 3.0</a>) ·
+          <a href="https://commons.wikimedia.org/wiki/File:Grand_Hotel_Terminus_(1928)_whisky_bar_lounge_dining_Bergen_Norway_2017-10-18_table_newspapers.jpg" target="_blank" rel="noopener">Salon du whisky bar</a> par Wolfmann (<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, recadrée) ·
+          <a href="https://commons.wikimedia.org/wiki/File:Lyon_5e_-_Rue_Octavio_Mey,_plaque.jpg" target="_blank" rel="noopener">Rue Octavio Mey</a> par Romainbehar (<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" target="_blank" rel="noopener">CC0</a>, recadrée).
+        </p>
+      </details>
+      <p class="footer__copy mono">© <span id="year">2026</span> Wallace Bar</p>
+    </div>
+  </footer>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
