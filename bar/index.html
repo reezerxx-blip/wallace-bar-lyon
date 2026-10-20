@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wallace Bar Lyon, pub du Vieux-Lyon</title>
   <meta name="description" content="Wallace Bar, 2 rue Octavio Mey à Lyon 5e : fish & chips, burgers, bières de la brasserie maison, sport en direct sur 4 écrans, quiz le lundi à 20h30.">
-  <meta name="theme-color" content="#f3eee4">
+  <meta name="theme-color" content="#f6f3ec">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Newsreader:wght@400;500&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add('js');</script>
   <script type="application/ld+json">
@@ -62,11 +62,10 @@
         <h1 id="hero-titre">Your everyday pub</h1>
         <p class="hero__lead">Fish &amp; chips, burgers, bière de la brasserie maison et tous les grands sports en direct sur 4 écrans, au bord de la Saône.</p>
         <p class="hero__actions">
-          <a class="btn" href="tel:+33472002391">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a class="link" href="tel:+33472002391">
             04 72 00 23 91
           </a>
-          <a class="btn btn--ghost" href="#infos">Horaires et accès</a>
+          <a class="link" href="#infos">Horaires et accès</a>
         </p>
       </div>
       <figure class="hero__photo">
@@ -78,7 +77,7 @@
     <section class="sec wrap" id="carte" aria-labelledby="carte-titre">
       <header class="sec__head">
         <h2 id="carte-titre">La carte</h2>
-        <p>Plat du jour le midi, du lundi au vendredi. Cuisine : lundi au samedi 12h-15h et 19h-22h, dimanche 11h-15h et 18h30-22h.</p>
+        <p>Restauration midi et soir tous les jours, et brunch le week-end. Plat du jour le midi, du lundi au vendredi. Cuisine : lundi au samedi 12h-15h et 19h-22h, dimanche 11h-15h et 18h30-22h.</p>
       </header>
 
       <h3 class="sub">Cuisine</h3>
@@ -131,6 +130,7 @@
         </section>
         <figure class="menu__photo">
           <img src="../assets/img/real/food-slider-fish-and-chips.jpg" width="1224" height="325" loading="lazy" alt="Fish and chips : filet de poisson en beignet doré, frites épaisses, sauce tartare et quartier de citron">
+          <figcaption>Fish &amp; chips.</figcaption>
         </figure>
       </div>
 
@@ -178,9 +178,6 @@
             <img src="../assets/img/real/wallace-brewery-beer-ipa-visit-01.jpg" width="720" height="550" loading="lazy" alt="Trois personnes devant les cuves inox de la brasserie du Wallace, deux en tee-shirt Wallace et un de dos avec le logo IPA">
             <figcaption>Visite de la brasserie.</figcaption>
           </figure>
-          <figure>
-            <img src="../assets/img/real/wallace-bar-16-beers-on-draught.jpg" width="280" height="447" loading="lazy" alt="Affiche typographique « 16 on draught » listant des bières pression dont Punk IPA, Guinness, Vedett, Chouffe et Newcastle">
-          </figure>
         </div>
       </div>
     </section>
@@ -217,10 +214,6 @@
             <div><h3>Wallace on Tour</h3><p>Un concours photo.</p></div>
           </li>
         </ul>
-        <figure class="events__photo">
-          <img src="../assets/img/real/wallace-lyon-musique-concert-vendredi-samedi-fete-2020-rhone-saone-france-web.jpg" width="280" height="447" loading="lazy" alt="Collage de photos de concerts au Wallace : musiciens sur scène, public, cible de fléchettes et feux d’artifice">
-          <figcaption>Concerts au Wallace.</figcaption>
-        </figure>
       </div>
     </section>
 
@@ -230,21 +223,26 @@
         <p>En juillet 2019, une vidéo tournée au Wallace pendant le Mondial féminin a fait le tour du monde.</p>
       </header>
       <div class="press">
-        <p class="press__label">Vidéo du Mondial féminin 2019, relayée par</p>
-        <ul class="press__big">
-          <li>Rolling Stone</li>
-          <li>USA Today</li>
-          <li>Fox News</li>
-          <li>The Guardian</li>
-        </ul>
-        <p class="press__label">Aussi dans</p>
-        <ul class="press__small">
-          <li>Le Progrès</li>
-          <li>ExitMag</li>
-          <li>Spot Web</li>
-          <li>Découvrir Auvergne-Rhône-Alpes</li>
-          <li>Brunch british</li>
-        </ul>
+        <h3>Juillet 2019</h3>
+        <div class="press__body">
+          <p class="note">Vidéo du Mondial féminin, relayée par</p>
+          <ul class="press__list">
+            <li>Rolling Stone</li>
+            <li>USA Today</li>
+            <li>Fox News</li>
+            <li>The Guardian</li>
+          </ul>
+        </div>
+        <h3>Aussi dans</h3>
+        <div class="press__body">
+          <ul class="press__list">
+            <li>Le Progrès</li>
+            <li>ExitMag</li>
+            <li>Spot Web</li>
+            <li>Découvrir Auvergne-Rhône-Alpes</li>
+            <li>Brunch british</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -254,12 +252,14 @@
       </header>
       <div class="info">
         <div class="info__block">
-          <h3>Horaires du bar</h3>
+          <h3>Bar</h3>
           <ul class="rows" id="hours">
             <li data-days="0,1,2,3,4"><span>Dimanche au jeudi</span><span>11h à 00h30</span></li>
             <li data-days="5,6"><span>Vendredi et samedi</span><span>11h à 02h30</span></li>
           </ul>
-          <h3>Horaires de la cuisine</h3>
+        </div>
+        <div class="info__block">
+          <h3>Cuisine</h3>
           <ul class="rows">
             <li><span>Lundi au samedi</span><span>12h-15h, 19h-22h</span></li>
             <li><span>Dimanche</span><span>11h-15h, 18h30-22h</span></li>
@@ -296,11 +296,9 @@
 
   <nav class="dock" aria-label="Accès rapide">
     <a href="tel:+33472002391">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       Appeler
     </a>
     <a href="https://www.google.com/maps/search/?api=1&amp;query=2+Rue+Octavio+Mey+69005+Lyon" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       Itinéraire
     </a>
   </nav>

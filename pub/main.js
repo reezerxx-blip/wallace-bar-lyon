@@ -7,7 +7,6 @@
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 
-  /* Horaires du bar, en minutes depuis minuit du jour d'ouverture (00h30 = 1470) */
   var BAR = { 0: 1470, 1: 1470, 2: 1470, 3: 1470, 4: 1470, 5: 1590, 6: 1590 };
   var OPEN = 660;
   var DAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };

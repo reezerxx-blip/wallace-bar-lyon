@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wallace Bar Lyon · Everyday pub, Vieux-Lyon</title>
 <meta name="description" content="Pub du Vieux-Lyon : fish & chips, burgers, bière brassée maison, sport sur 4 écrans, quiz le lundi à 20h30. 2 Rue Octavio Mey, Lyon 5e.">
-<meta name="theme-color" content="#D91E28">
+<meta name="theme-color" content="#12302a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800..900&family=Newsreader:wght@500;600&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800..900&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
 {
@@ -58,7 +58,7 @@
   <div class="wrap hero__in">
     <div class="hero__text">
       <p class="kicker">Vieux-Lyon, bord de Saône</p>
-      <h1>Everyday<br>pub</h1>
+      <h1>Everyday <span>pub</span></h1>
       <p class="hero__lede">Fish &amp; chips, burgers, bière brassée maison, sport en direct sur 4 écrans, quiz le lundi, concerts, whisky.</p>
       <p class="status" id="status" aria-live="polite"><span class="status__dot" aria-hidden="true"></span><span id="status-text">Bar : 11h-00h30 dim-jeu, 11h-02h30 ven-sam</span></p>
       <div class="hero__cta">
@@ -72,33 +72,35 @@
         </a>
       </div>
     </div>
-    <figure class="hero__photo">
+    <figure class="pin hero__photo">
       <img src="../assets/img/real/st-patricks-2019-wallace-01.jpg" width="720" height="540" alt="Salle du Wallace pleine de monde pendant la Saint-Patrick 2019, lustre, guirlandes et écrans de télévision">
       <figcaption>Saint-Patrick 2019</figcaption>
     </figure>
   </div>
 </section>
 
-<section class="sec" id="biere">
+<div class="tartan" aria-hidden="true"></div>
+
+<section class="sec sec--night" id="biere">
   <div class="wrap">
     <h2 class="reveal">Bière maison</h2>
     <p class="sec__intro reveal">Le Wallace brasse sa propre bière.</p>
 
     <div class="beer reveal">
-      <ul class="beer__list">
+      <ul class="taps">
         <li><strong>Wallace IPA</strong></li>
         <li><strong>Double IPA</strong></li>
         <li><strong>Lager</strong></li>
         <li><strong>NEIPA</strong></li>
       </ul>
-      <figure class="beer__photo">
+      <figure class="pin beer__photo">
         <img src="../assets/img/real/wallace-brewery-beer-ipa-visit-01.jpg" width="720" height="550" alt="Trois personnes devant les cuves de la brasserie Wallace, tee-shirts Wallace et IPA">
         <figcaption>Visite de la brasserie</figcaption>
       </figure>
     </div>
 
     <div class="draught reveal">
-      <figure class="draught__poster">
+      <figure class="pin draught__poster">
         <img src="../assets/img/real/wallace-bar-16-beers-on-draught.jpg" width="280" height="447" alt="Affiche des 16 bières à la pression : Punk IPA, Budvar, Grim, Carlsberg, Red, Kilkenny, Guinness, Vedett, Jet, Black, Chouffe, Ciney, Edelweiss, Elvis Juice, Strongbow, Twisted Thistle, Newcastle" loading="lazy">
       </figure>
       <div class="draught__text">
@@ -123,14 +125,14 @@
   </div>
 </section>
 
-<section class="sec sec--tint" id="cuisine">
+<section class="sec sec--wood" id="cuisine">
   <div class="wrap">
     <h2 class="reveal">Cuisine</h2>
-    <p class="sec__intro reveal">Cuisine lun-sam 12h-15h et 19h-22h, dim 11h-15h et 18h30-22h. Plat du jour le midi, du lundi au vendredi.</p>
+    <p class="sec__intro reveal">Restauration midi et soir tous les jours : lun-sam 12h-15h et 19h-22h, dim 11h-15h et 18h30-22h. Plat du jour le midi, du lundi au vendredi. Brunch le week-end.</p>
 
     <img class="reveal banner" src="../assets/img/real/food-slider-fish-and-chips.jpg" width="1224" height="325" alt="Fish and chips : filet de poisson pané, frites épaisses, sauce tartare et quartier de citron" loading="lazy">
 
-    <div class="menu reveal">
+    <div class="menu slate-board reveal">
       <div class="menu__col">
         <h3>Pub classics</h3>
         <ul class="price">
@@ -172,64 +174,57 @@
   </div>
 </section>
 
-<section class="sec" id="sport">
+<section class="sec sec--green" id="sport">
   <div class="wrap">
-    <h2 class="reveal">Sport &amp; événements</h2>
+    <h2 class="reveal">Sport &amp; events</h2>
     <p class="sec__intro reveal">Foot, rugby, darts : tous les grands sports en direct sur 4 grands écrans.</p>
 
-    <div class="sport reveal">
-      <figure class="sport__photo">
-        <img src="../assets/img/real/wallace-lyon-football-rugby-sport-live-television-tv-large-screens-gaelic-bar-pub-rhone-saone-france-2020.jpg" width="280" height="447" alt="Deux photos anciennes en noir et blanc : joueurs qui courent sur un terrain devant des tribunes, et une mêlée de rugby" loading="lazy">
-      </figure>
-      <ul class="slate">
-        <li>
-          <p class="slate__when">Lundi, 20h30</p>
-          <h3>Quiz</h3>
-          <p>Le plus grand quiz de Lyon. Verres gratuits.</p>
-        </li>
-        <li>
-          <p class="slate__when">Régulier</p>
-          <h3>Concerts</h3>
-          <p>Des concerts au bar, dont la Fête de la Musique.</p>
-        </li>
-        <li>
-          <p class="slate__when">Club</p>
-          <h3>Whisky Club</h3>
-          <p>Autour de la Wee whisky list.</p>
-        </li>
-        <li>
-          <p class="slate__when">Brasserie</p>
-          <h3>Wallace Craft Beer</h3>
-          <p>Les bières de la brasserie maison.</p>
-        </li>
-        <li>
-          <p class="slate__when">Concours</p>
-          <h3>Wallace on Tour</h3>
-          <p>Le concours photo.</p>
-        </li>
-      </ul>
-      <figure class="sport__photo sport__photo--b">
-        <img src="../assets/img/real/wallace-lyon-musique-concert-vendredi-samedi-fete-2020-rhone-saone-france-web.jpg" width="280" height="447" alt="Montage de photos de concerts au Wallace : guitariste, public qui danse, feux d'artifice" loading="lazy">
-      </figure>
+    <div class="score reveal">
+      <p class="score__cell"><b>4</b><span>grands écrans</span></p>
+      <p class="score__cell"><b>20h30</b><span>quiz du lundi</span></p>
     </div>
-  </div>
-</section>
+
+    <div class="sport reveal">
+      <table class="fixtures">
+        <caption class="sr">Événements du Wallace</caption>
+        <thead><tr><th scope="col">Jour</th><th scope="col">Événement</th><th scope="col">Heure</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Lundi</th><td><strong>Quiz</strong>Le plus grand quiz de Lyon. Verres gratuits.</td><td class="t">20h30</td></tr>
+          <tr><th scope="row">Régulier</th><td><strong>Concerts</strong>Des concerts au bar, dont la Fête de la Musique.</td><td class="t t--tbc">à confirmer</td></tr>
+          <tr><th scope="row">Club</th><td><strong>Whisky Club</strong>Autour de la Wee whisky list.</td><td class="t t--tbc">à confirmer</td></tr>
+          <tr><th scope="row">Brasserie</th><td><strong>Wallace Craft Beer</strong>Les bières de la brasserie maison.</td><td class="t t--tbc">à confirmer</td></tr>
+          <tr><th scope="row">Concours</th><td><strong>Wallace on Tour</strong>Le concours photo.</td><td class="t t--tbc">à confirmer</td></tr>
+        </tbody>
+      </table>
+      <div class="sport__photos">
+        <figure class="pin sport__photo">
+          <img src="../assets/img/real/wallace-lyon-football-rugby-sport-live-television-tv-large-screens-gaelic-bar-pub-rhone-saone-france-2020.jpg" width="280" height="447" alt="Deux photos anciennes en noir et blanc : joueurs qui courent sur un terrain devant des tribunes, et une mêlée de rugby" loading="lazy">
+          <figcaption>Foot, rugby, darts</figcaption>
+        </figure>
+        <figure class="pin sport__photo sport__photo--b">
+          <img src="../assets/img/real/wallace-lyon-musique-concert-vendredi-samedi-fete-2020-rhone-saone-france-web.jpg" width="280" height="447" alt="Montage de photos de concerts au Wallace : guitariste, public qui danse, feux d'artifice" loading="lazy">
+          <figcaption>Concerts</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div></section>
+
+<div class="tartan" aria-hidden="true"></div>
 
 <section class="press" id="presse">
   <div class="wrap">
     <h2 class="reveal">Dans la presse</h2>
     <p class="press__lead reveal">Mondial féminin 2019 : la vidéo tournée au Wallace relayée par la presse internationale.</p>
     <ul class="press__big reveal">
-      <li>Rolling Stone</li>
-      <li>USA Today</li>
-      <li>Fox News</li>
-      <li>The Guardian</li>
-    </ul>
-    <p class="press__more reveal">Le Wallace a aussi été cité par <strong>Le Progrès</strong>, <strong>ExitMag</strong>, <strong>Spot Web</strong> et <strong>Découvrir Auvergne-Rhône-Alpes</strong>. Son brunch british a aussi eu droit à un article.</p>
+      <li class="mast mast--a">Rolling Stone</li>
+      <li class="mast mast--b">USA Today</li>
+      <li class="mast mast--c">Fox News</li>
+      <li class="mast mast--d">The Guardian</li>
+    </ul>    <p class="press__more reveal">Le Wallace a aussi été cité par <strong>Le Progrès</strong>, <strong>ExitMag</strong>, <strong>Spot Web</strong> et <strong>Découvrir Auvergne-Rhône-Alpes</strong>. Son brunch british a aussi eu droit à un article.</p>
   </div>
 </section>
 
-<section class="sec" id="infos">
+<section class="sec sec--night" id="infos">
   <div class="wrap infos">
     <div class="infos__main reveal">
       <h2>Infos pratiques</h2>
