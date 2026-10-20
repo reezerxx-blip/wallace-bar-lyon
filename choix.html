@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Wallace Bar Lyon, choix de la maquette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,700..900&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee4;--ink:#1d1a17;--red:#b91c1c;--line:#cfc6b6;--s:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Public Sans",sans-serif;padding:48px 16px}
+main{max-width:960px;margin:0 auto}
+h1{font:800 clamp(32px,6vw,56px)/1.05 Archivo,sans-serif;margin:0 0 8px}
+p{margin:0 0 32px;max-width:56ch}
+.grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+a.card{display:block;border:1px solid var(--ink);padding:24px;text-decoration:none;color:inherit;min-height:44px}
+a.card:hover,a.card:focus-visible{background:var(--ink);color:var(--bg);outline:none}
+.tag{font:600 12px/1 "Public Sans";letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+a.card:hover .tag,a.card:focus-visible .tag{color:#f3b3b3}
+h2{font:800 28px/1.1 Archivo,sans-serif;margin:8px 0}
+small{display:block;margin-top:32px;color:#6b6358}
+</style>
+</head>
+<body>
+<main>
+<h1>Wallace Bar Lyon</h1>
+<p>Deux directions pour la refonte, avec les mêmes informations officielles. Choisissez celle qui vous ressemble.</p>
+<div class="grid">
+<a class="card" href="pub/"><span class="tag">Version A</span><h2>Pub vivant</h2><span>Affiche de match, couleurs franches, titres en capitales.</span></a>
+<a class="card" href="bar/"><span class="tag">Version B</span><h2>Bar éditorial</h2><span>Carte imprimée, fond papier, revue de presse.</span></a>
+</div>
+<small>Maquettes non officielles. Contenu issu de wallacebarlyon.com.</small>
+</main>
+</body>
+</html>
