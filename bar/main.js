@@ -1,65 +1,124 @@
 (function () {
-  'use strict';
+  var FIN_BAR = { 0: 1470, 1: 1470, 2: 1470, 3: 1470, 4: 1470, 5: 1590, 6: 1590 };
+  var OUVERTURE_BAR = 660;
+  var CUISINE = {
+    std: [[720, 900], [1140, 1320]],
+    dim: [[660, 900], [1110, 1320]]
+  };
+  var JOURS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
 
-  var $ = function (s) { return document.querySelector(s); };
-  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  function heure(min) {
+    var m = min % 1440;
+    var h = Math.floor(m / 60);
+    var r = m % 60;
+    return (h < 10 ? '0' + h : h) + 'h' + (r ? (r < 10 ? '0' + r : r) : '');
+  }
 
-  var year = $('#year');
-  if (year) year.textContent = String(new Date().getFullYear());
+  function fenetres(jour) {
+    return jour === 0 ? CUISINE.dim : CUISINE.std;
+  }
 
-  /* Horaires du bar : fermeture en minutes depuis minuit du jour d'ouverture */
-  var BAR = { 0: [660, 1470], 1: [660, 1470], 2: [660, 1470], 3: [660, 1470], 4: [660, 1470], 5: [660, 1590], 6: [660, 1590] };
-  var DAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+  function statutBar(jour, min) {
+    var veille = (jour + 6) % 7;
+    if (FIN_BAR[veille] > 1440 && min < FIN_BAR[veille] - 1440) {
+      return { ouvert: true, texte: "Ouvert jusqu'à " + heure(FIN_BAR[veille]) };
+    }
+    if (min >= OUVERTURE_BAR) {
+      return { ouvert: true, texte: "Ouvert jusqu'à " + heure(FIN_BAR[jour]) };
+    }
+    return { ouvert: false, texte: 'Fermé, ouvre à 11h' };
+  }
 
-  function parisNow() {
-    try {
-      var o = {};
-      new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Paris', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
-        .formatToParts(new Date()).forEach(function (p) { o[p.type] = p.value; });
-      return { day: DAYS[o.weekday], min: parseInt(o.hour, 10) * 60 + parseInt(o.minute, 10) };
-    } catch (e) {
-      var n = new Date();
-      return { day: n.getDay(), min: n.getHours() * 60 + n.getMinutes() };
+  function statutCuisine(jour, min) {
+    var f = fenetres(jour);
+    var i;
+    for (i = 0; i < f.length; i++) {
+      if (min >= f[i][0] && min < f[i][1]) {
+        return { ouvert: true, texte: "Cuisine ouverte jusqu'à " + heure(f[i][1]) };
+      }
+    }
+    for (i = 0; i < f.length; i++) {
+      if (min < f[i][0]) {
+        return { ouvert: false, texte: 'Cuisine fermée, reprend à ' + heure(f[i][0]) };
+      }
+    }
+    var demain = fenetres((jour + 1) % 7)[0][0];
+    return { ouvert: false, texte: 'Cuisine fermée, reprend demain à ' + heure(demain) };
+  }
+
+  function jourService(jour, min) {
+    var veille = (jour + 6) % 7;
+    return (FIN_BAR[veille] > 1440 && min < FIN_BAR[veille] - 1440) ? veille : jour;
+  }
+
+  function programme(jour, min) {
+    var s = 'Sport en direct sur 4 écrans.';
+    if (jourService(jour, min) === 1) {
+      return (min < 1230 ? 'Quiz ce soir, 20h30. ' : 'Quiz ce soir, depuis 20h30. ') + s;
+    }
+    return s;
+  }
+
+  function statut(jour, min) {
+    return { bar: statutBar(jour, min), cuisine: statutCuisine(jour, min), soir: programme(jour, min) };
+  }
+
+  function maintenant() {
+    var p = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Paris', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+    }).formatToParts(new Date());
+    var o = {};
+    p.forEach(function (x) { o[x.type] = x.value; });
+    var map = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    return { jour: map[o.weekday], min: parseInt(o.hour, 10) * 60 + parseInt(o.minute, 10) };
+  }
+
+  function afficher(jour, min) {
+    var s = statut(jour, min);
+    var haut = document.getElementById('statut-haut-texte');
+    var dot = document.querySelector('#statut-haut .dot');
+    var bar = document.getElementById('a-bar');
+    var cui = document.getElementById('a-cuisine');
+    var soir = document.getElementById('a-soir');
+    if (haut) haut.textContent = s.bar.texte;
+    if (dot) dot.className = 'dot ' + (s.bar.ouvert ? 'dot--ouvert' : 'dot--ferme');
+    if (bar) bar.textContent = s.bar.texte;
+    if (cui) cui.textContent = s.cuisine.texte;
+    if (soir) soir.textContent = s.soir;
+    var lignes = document.querySelectorAll('#jours tbody tr');
+    for (var i = 0; i < lignes.length; i++) {
+      var actif = (' ' + lignes[i].getAttribute('data-j') + ' ').indexOf(' ' + jourService(jour, min) + ' ') !== -1;
+      lignes[i].classList.toggle('est-aujourdhui', actif);
+      if (actif) lignes[i].setAttribute('aria-current', 'date');
+      else lignes[i].removeAttribute('aria-current');
     }
   }
 
-  function fmt(m) {
-    m = m % 1440;
-    var h = Math.floor(m / 60), mm = m % 60;
-    return (h < 10 ? '0' : '') + h + 'h' + (mm ? (mm < 10 ? '0' : '') + mm : '');
+  window.wallaceStatut = statut;
+
+  function tick() {
+    var n = maintenant();
+    afficher(n.jour, n.min);
   }
+  tick();
+  setInterval(tick, 60000);
 
-  function render() {
-    var now = parisNow();
-    var prev = (now.day + 6) % 7;
-    var open = false, closeAt = BAR[now.day][1], serviceDay = now.day;
-    if (now.min < BAR[prev][1] - 1440) { open = true; closeAt = BAR[prev][1]; serviceDay = prev; }
-    else if (now.min >= BAR[now.day][0] && now.min < BAR[now.day][1]) { open = true; }
-
-    var text = open ? 'Ouvert jusqu’à ' + fmt(closeAt) : 'Fermé, ouvre à ' + fmt(BAR[now.day][0]);
-    $$('[data-status]').forEach(function (el) {
-      el.classList.toggle('is-open', open);
-      el.classList.toggle('is-closed', !open);
-      el.querySelector('.status__label').textContent = text;
-    });
-    $$('#hours li').forEach(function (li) {
-      var days = li.getAttribute('data-days').split(',').map(Number);
-      li.classList.toggle('is-today', days.indexOf(serviceDay) !== -1);
-    });
-  }
-  render();
-  setInterval(render, 60000);
-
-  /* Fondu discret à l'apparition des sections */
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var targets = $$('.sec');
-  if (!reduced && 'IntersectionObserver' in window) {
-    targets.forEach(function (el) { el.classList.add('fade'); });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  var liens = document.querySelectorAll('.nav a');
+  if ('IntersectionObserver' in window && liens.length) {
+    var cibles = [];
+    for (var i = 0; i < liens.length; i++) {
+      var el = document.querySelector(liens[i].getAttribute('href'));
+      if (el) cibles.push({ el: el, lien: liens[i] });
+    }
+    var obs = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        cibles.forEach(function (c) {
+          if (c.el !== e.target) return;
+          if (e.isIntersecting) c.lien.setAttribute('aria-current', 'true');
+          else c.lien.removeAttribute('aria-current');
+        });
       });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-    targets.forEach(function (el) { io.observe(el); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    cibles.forEach(function (c) { obs.observe(c.el); });
   }
 })();
