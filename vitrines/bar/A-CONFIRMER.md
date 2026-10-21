@@ -15,16 +15,19 @@ Règle appliquée : quand les sources divergent, la vitrine affiche la source la
 - Email et téléphone repris de la carte de visite : à vérifier.
 
 ## Horaires (affichés)
-- Bar : 11h-00h30 du dimanche au jeudi, 11h-02h30 vendredi et samedi (site officiel).
-  - **Question Q1 en attente** : PagesJaunes (01/10/2026) dit 02h le vendredi et le samedi. Non modifié : point classé « en attente du patron ». Si 02h : tableau `11h-02h`, JSON-LD `"closes": "02:00"`, `main.js` `"5":[660,1560],"6":[660,1560]`.
-  - Dimanche : 00h30 ou minuit (une fiche de juillet 2025 dit 23h59).
-- Cuisine : 12h-15h et 19h-22h du lundi au samedi, 11h-15h et 18h30-22h le dimanche (site officiel `food.html`). Variante 12h-14h30 sur la page d'accueil officielle (Q4).
+Priorité des sources : Google Maps mis à jour par l'entreprise > post Instagram récent (2026) > site officiel > annuaires. Compléments du 21/10/2026 : `audit/verif-infos.md`.
+- Bar : 11h-00h30 du dimanche au jeudi, 11h-02h30 vendredi et samedi (Google Maps ; vendredi-samedi confirmé aussi par la bio Instagram).
+  - **B1 reste ouverte** : la bio Instagram dit « Sun - Thu 11h - 1h », Google Maps dit 00h30. Maps appliqué (règle de priorité), question gardée : 00h30 ou 01h du dimanche au jeudi ? Si 01h : tableau `11h-01h`, JSON-LD `"closes": "01:00"`, `main.js` `"0":[660,1500]` à `"4":[660,1500]`.
+- Cuisine (Google Maps, onglet Cuisine) : 12h-14h30 du lundi au vendredi, 12h-15h le samedi, 11h-15h le dimanche ; soir 19h-22h tous les jours, dimanche compris.
 
 ## Corrigé d'après les sources, à faire valider
-- Quiz du lundi : **20h** (programme officiel `sports.html` d'octobre 2026 ; l'ancienne page `events.html` disait 20h30). Q2.
-- « Live le vendredi » retiré (aucune source) : remplacé par « Concerts, régulièrement, programme sur Facebook et Instagram ». Q3 : y a-t-il un jour fixe ?
-- Brunch : « Samedi 12h-15h, dimanche 11h-15h » (site officiel `food.html`, non daté). Q5.
-- Terrasse : « Grande terrasse couverte face à la Saône » (visiterlyon 2025). Nombre de places inconnu. Q7.
+- Quiz du lundi : « Lundi, inscriptions dès 20h » (affiches et posts Instagram 09-10/2026 ; la bio dit 20h30, probablement le début du jeu). En français et en anglais. Heure exacte de début : question B6 résolue pour le jour, heure à confirmer au passage.
+- Fléchettes : un mercredi par mois, 19h (Instagram : 23/09 et 28/10/2026). Dates publiées sur Instagram.
+- Concerts : ponctuels, pas de jour fixe, programme sur Instagram (B7 résolue). « Live le vendredi » reste retiré.
+- Brunch : week-end, samedi 12h-15h, dimanche 11h-15h (bio Instagram, Maps ; B5 résolue).
+- Terrasse confirmée par Google Maps (B9 résolue). Nombre de places inconnu.
+- Infos pratiques ajoutées (Google Maps, B15 résolue) : accès fauteuil roulant, Wi-Fi gratuit, réservations, menu enfant, chaises hautes, titres-restaurant, vente à emporter, happy hour jusqu'à 20h (Maps dit 11h-20h).
+- Note Google (4,2/5) volontairement non affichée : elle bouge et ne doit pas figurer en données structurées self-serving.
 
 ## Prix
 - Les prix de 2019 ont été retirés : « prix sur place ». Fournir la carte actuelle si le patron veut afficher des prix (Q9). `priceRange` omis du JSON-LD.
@@ -38,7 +41,7 @@ Règle appliquée : quand les sources divergent, la vitrine affiche la source la
 ## Autres points
 - Chiffres « 200+ whiskies » et « 16 pressions » : à vérifier à la date de mise en ligne (Q10).
 - La liste des plats vient de la carte officielle non datée : à vérifier.
-- Liens sociaux : Instagram @wallacelyon et Facebook https://www.facebook.com/wallace.bar.9 (confirmés par visiterlyon 2025). Seuls ces liens sont dans `sameAs`.
+- Liens : Instagram @wallacelyon, TikTok @wallacelyon (lien de la bio Instagram) et fiche Google Maps (itinéraire, `hasMap`, `sameAs`). **Aucun lien Facebook** : `facebook.com/wallace.bar.9` est un profil personnel, pas une Page. Question : le Bar a-t-il une Page Facebook officielle ?
 - JSON-LD : `geo` absent, à ajouter avec les coordonnées de la fiche Google (Q14).
 - Accès (métro, parking) non affiché : Q13.
 - Photos : la plus récente date de 2019 (légende « Soirée Saint-Patrick », sans année). Demander des photos récentes (Q14).

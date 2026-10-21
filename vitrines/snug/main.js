@@ -6,7 +6,7 @@
 var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/REMPLACER/pub?output=csv'; // Snug : pas de module Matchs (matches:false)
 
 // hours / kitchen : null = horaires à confirmer (statut neutre) ; [] = fermé ce jour-là.
-var CONFIG = {"name":"Wallace Snug","phone":"09 81 95 10 61","tel":"+33981951061","hours":{"0":[960,1470],"1":[960,1470],"2":[960,1470],"3":[960,1470],"4":[960,1470],"5":[960,1560],"6":[900,1560]},"kitchen":null,"matches":false,"extras":[],"kitchenTodayLabel":false};
+var CONFIG = {"name":"Wallace Snug","phone":"09 81 95 10 61","tel":"+33981951061","hours":{"0":[960,1500],"1":[960,1500],"2":[960,1500],"3":[960,1500],"4":[960,1500],"5":[960,1500],"6":[960,1500]},"kitchen":null,"matches":false,"extras":[{"day":0,"text":"Happy hour jusqu’à <b>20h</b>"},{"day":1,"text":"Happy hour jusqu’à <b>20h</b>"},{"day":2,"text":"Happy hour jusqu’à <b>20h</b>"},{"day":3,"text":"Happy hour jusqu’à <b>20h</b>"},{"day":4,"text":"Happy hour jusqu’à <b>20h</b>"},{"day":5,"text":"Happy hour jusqu’à <b>20h</b>"},{"day":6,"text":"Happy hour jusqu’à <b>20h</b>"}],"kitchenTodayLabel":false};
 
 (function () {
   'use strict';

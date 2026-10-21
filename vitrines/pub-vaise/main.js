@@ -6,7 +6,7 @@
 var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1PfIjnpxyIc2DXrZV7oFxkQfrHndJWJg_vLndx-q7QuE/gviz/tq?tqx=out:csv&gid=0';
 
 // hours / kitchen : null = horaires à confirmer (statut neutre) ; [] = fermé ce jour-là.
-var CONFIG = {"name":"Wallace Pub Vaise","phone":"04 72 09 97 93","tel":"+33472099793","hours":{"0":[],"1":[600,1500],"2":[600,1500],"3":[600,1500],"4":[600,1500],"5":[600,1500],"6":[600,1500]},"kitchen":{"0":[],"1":[[720,870],[1140,1320]],"2":[[720,870],[1140,1320]],"3":[[720,870],[1140,1320]],"4":[[720,870],[1140,1320]],"5":[[720,870],[1140,1320]],"6":[[720,870],[1140,1320]]},"matches":true,"extras":[{"day":1,"nth":1,"text":"Musique irlandaise ce soir"}],"kitchenTodayLabel":true};
+var CONFIG = {"name":"Wallace Pub Vaise","phone":"04 72 09 97 93","tel":"+33472099793","hours":{"0":[1050,1440],"1":[600,1500],"2":[600,1500],"3":[600,1500],"4":[600,1500],"5":[600,1500],"6":[600,1500]},"kitchen":{"0":[[1140,1320]],"1":[[720,870],[1140,1320]],"2":[[720,870],[1140,1320]],"3":[[720,870],[1140,1320]],"4":[[720,870],[1140,1320]],"5":[[720,870],[1140,1320]],"6":[[720,870],[1140,1320]]},"matches":true,"extras":[{"day":1,"nth":1,"text":"Musique irlandaise ce soir"}],"kitchenTodayLabel":true};
 
 (function () {
   'use strict';

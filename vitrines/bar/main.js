@@ -6,7 +6,7 @@
 var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1PfIjnpxyIc2DXrZV7oFxkQfrHndJWJg_vLndx-q7QuE/gviz/tq?tqx=out:csv&gid=0';
 
 // hours / kitchen : null = horaires à confirmer (statut neutre) ; [] = fermé ce jour-là.
-var CONFIG = {"name":"Wallace Bar","phone":"04 72 00 23 91","tel":"+33472002391","hours":{"0":[660,1470],"1":[660,1470],"2":[660,1470],"3":[660,1470],"4":[660,1470],"5":[660,1590],"6":[660,1590]},"kitchen":{"0":[[660,900],[1110,1320]],"1":[[720,900],[1140,1320]],"2":[[720,900],[1140,1320]],"3":[[720,900],[1140,1320]],"4":[[720,900],[1140,1320]],"5":[[720,900],[1140,1320]],"6":[[720,900],[1140,1320]]},"matches":true,"extras":[{"day":1,"text":"Quiz ce soir, <b>20h</b>"}],"kitchenTodayLabel":true};
+var CONFIG = {"name":"Wallace Bar","phone":"04 72 00 23 91","tel":"+33472002391","hours":{"0":[660,1470],"1":[660,1470],"2":[660,1470],"3":[660,1470],"4":[660,1470],"5":[660,1590],"6":[660,1590]},"kitchen":{"0":[[660,900],[1140,1320]],"1":[[720,870],[1140,1320]],"2":[[720,870],[1140,1320]],"3":[[720,870],[1140,1320]],"4":[[720,870],[1140,1320]],"5":[[720,870],[1140,1320]],"6":[[720,900],[1140,1320]]},"matches":true,"extras":[{"day":1,"text":"Quiz ce soir, inscriptions dès <b>20h</b>"}],"kitchenTodayLabel":true};
 
 (function () {
   'use strict';

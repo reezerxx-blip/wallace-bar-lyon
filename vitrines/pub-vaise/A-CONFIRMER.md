@@ -15,15 +15,19 @@ Règle appliquée : quand les sources divergent, la vitrine affiche la source la
 - Email et téléphone repris de la carte de visite : à vérifier.
 
 ## Horaires (affichés)
-- Lundi à samedi : bar 10h-01h (visiterlyon 16/06/2026, Privateaser).
-- **Dimanche : fermé** (visiterlyon 2026 « du lundi au samedi », Schlouk « Dimanche fermé »). Le statut affiche désormais « Fermé, ouvre demain à 10h » au lieu de « à confirmer » (`CONFIG.hours["0"] = []`). Q6, avec les fermetures annuelles (1er janvier, 1er mai, 25 décembre selon visiterlyon 2026, non affichées).
-- Cuisine : **12h-14h30** et 19h-22h du lundi au samedi (site officiel `food.html`). Q4 : 14h30 ou 15h ?
+Priorité des sources : Google Maps mis à jour par l'entreprise > post Instagram récent (2026) > site officiel > annuaires.
+- Lundi à samedi : bar 10h-01h (Google Maps, mis à jour par l'entreprise ; P1 résolue).
+- **Dimanche : ouvert 17h30-00h** (Google Maps, horaires principaux) ; Instagram 09/10/2026 : « Notre cuisine est désormais ouverte tous les dimanches soirs ». Remplace « Dimanche fermé » (visiterlyon, Schlouk, périmés). `CONFIG.hours["0"] = [1050,1440]`, JSON-LD `Sunday` 17:30-00:00. Fermetures annuelles (1er janvier, 1er mai, 25 décembre) non affichées.
+- Cuisine : 12h-14h30 et 19h-22h du lundi au samedi. **Dimanche soir : 19h-22h par défaut** (créneau du soir de semaine) car Instagram ne donne pas l'heure. Question : heure de la cuisine le dimanche soir ?
 
 ## Corrigé d'après les sources, à faire valider
 - Bloc Brunch supprimé : aucune source ne cite un brunch à Vaise. Q5.
 - Terrasse : « Terrasse » sans « couverte » (non vérifiable). Q7.
 - Carte : fish & chips, burgers, pulled pork, grillades au four Josper, planches, menu enfant, desserts maison (site officiel `food.html`, non daté).
-- Facebook : https://www.facebook.com/pubvaise.wallace (cité par visiterlyon 2026), ajouté en lien et dans `sameAs`. Q12 : page officielle ?
+- Facebook : `pubvaise.wallace` retiré des liens et du `sameAs` (contenu indisponible, peut-être mort). Liens actuels : Instagram @wallacepub et fiche Google Maps (itinéraire, `hasMap`, `sameAs`). Question : le Pub a-t-il une Page Facebook officielle encore active ? (`facebook.com/wallacepub` est un autre établissement, ne pas l'utiliser.)
+- Quiz : « Certains lundis, 20h, sur réservation » (Instagram : 12/10, 09/11, 30/11/2026), dates sur Instagram. Question : quiz tous les lundis ou seulement certains ?
+- Carte de saison (automne) citée ; réservation 04 72 09 97 93 et accès métro D / Gare de Vaise (5 min à pied) ajoutés (P14 résolue). Services Maps ajoutés : accessibilité, parking payant dans la rue, Wi-Fi, chiens.
+- Note Google (4,3/5) volontairement non affichée.
 - Enseigne : H1 « Wallace Pub Vaise » (nom du JSON-LD et du logo). Q12 : « Wallace Pub » ou « Wallace Pub Vaise » ?
 
 ## Prix
@@ -37,7 +41,6 @@ Règle appliquée : quand les sources divergent, la vitrine affiche la source la
 ## Autres points
 - Les 2 écrans géants, le four Josper, la musique irlandaise le 1er lundi et les concerts sont confirmés (visiterlyon 2026).
 - Chiffre whiskies (120 à 130 selon les sources) non affiché : Q10.
-- Accès (métro D, Gare de Vaise) non affiché : Q13.
 - Photos : images génériques de banque d'images, pas des photos du pub. Remplacer par des photos réelles de Vaise (Q14).
 - JSON-LD : `geo` absent, à ajouter avec les coordonnées de la fiche Google (Q14). Pas de `logo` (aucun fichier logo).
 - Image de partage : `img/og.jpg` (JPG 1200x630, recadrage de hero-1024.webp, image générique).

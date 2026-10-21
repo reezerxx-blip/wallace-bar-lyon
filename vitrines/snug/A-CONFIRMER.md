@@ -15,14 +15,20 @@ Règle appliquée : quand les sources divergent, la vitrine affiche la source la
 - Email et téléphone repris de la carte de visite : à vérifier.
 
 ## Horaires (affichés)
-- Lundi à jeudi et dimanche : 16h-00h30. Vendredi : 16h-02h. Samedi : 15h-02h (wallacesnug.com et Privateaser concordent ; Schlouk Map indique une fermeture à 01h en semaine).
+- **16h-01h tous les jours** (Google Maps ; la bio Instagram dit « Everyday from 4pm » et un post du 15/10/2026 parle de « till one in the morning »). Règle de priorité : Maps > Instagram > site officiel > annuaires.
+- **S1 reste ouverte** : le site officiel et Privateaser disent 00h30 en semaine, 02h le vendredi et le samedi, samedi dès 15h. Maps appliqué partout (tableau, statut, bloc Aujourd'hui, JSON-LD). Si le patron confirme 02h ven.-sam. : tableau, `"closes"` et `main.js` (`"5"` et `"6"` à `1560`) à modifier.
 - Jour(s) de fermeture éventuels.
+- Happy hour **16h-20h tous les jours** (Maps ; Instagram : « 4 hours of happy hour »). Maps affiche 18h-20h le jeudi : probable erreur, non reprise.
 
 ## Corrigé d'après les sources, à faire valider
 - Accroche : « plus de 200 références, des gins, des cocktails et des pressions » (Privateaser « 200 whiskies », carte officielle). L'ancienne « carte courte » est retirée. Q10.
-- Carte : ajout de « Gins » et « Planches et snacks » (Privateaser « snacking », site officiel « nibbles »).
-- Terrasse : « Terrasse couverte, ouverte toute l'année » (Privateaser, site officiel). Q7.
-- Facebook : https://www.facebook.com/wallace.snug.3 (cité par visiterlyon 2025 et le site officiel), ajouté en lien et dans `sameAs`. Q12 : page officielle ?
+- Carte : « Gins » et « Snacks » (bio Instagram « Snacks » ; S3 résolue, « planches » non vu, retiré).
+- Terrasse couverte confirmée par Google Maps (S4 résolue).
+- Écrans : 2 écrans (Instagram : Ligue des champions, Premier League, matchs de la France ; S5 résolue). Formulation prudente « quelques matchs ».
+- Infos pratiques ajoutées (Maps) : entrée accessible en fauteuil roulant, Wi-Fi gratuit, chiens acceptés.
+- Liens : Instagram @wallacesnug et fiche Google Maps (itinéraire, `hasMap`, `sameAs`). **Aucun lien Facebook** : `facebook.com/wallace.snug.3` est un profil personnel. Question : le Snug a-t-il une Page Facebook officielle ?
+- Note Google (4,3/5) volontairement non affichée.
+- Instagram : plusieurs visuels récents sont générés par IA ; ne pas les reprendre comme photos du lieu (C11).
 
 ## Prix
 - Aucun prix affiché : « prix sur place ». `priceRange` omis du JSON-LD (Q9).
