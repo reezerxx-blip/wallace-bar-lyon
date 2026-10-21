@@ -196,7 +196,7 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
     if (colors) {
       el.style.background = T.gradient(colors);
       txt = T.textFor(colors);
-      if (txt) el.style.color = txt; else span.className += ' mlist__team--pill';
+      span.className += ' mlist__team--pill';
     } else el.className += ' is-neutral';
     el.appendChild(span);
     return el;
@@ -211,7 +211,7 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
     if (colors) {
       el.style.background = T.gradient(colors);
       txt = T.textFor(colors);
-      if (txt) el.style.color = txt; else span.className += ' mlist__team--pill';
+      span.className += ' mlist__team--pill';
     } else el.className += ' is-neutral';
     el.appendChild(span);
     return el;

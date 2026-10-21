@@ -196,7 +196,7 @@ var CONFIG = {"name":"Wallace Pub Vaise","hours":{"0":null,"1":[600,1500],"2":[6
     if (colors) {
       el.style.background = T.gradient(colors);
       txt = T.textFor(colors);
-      if (txt) el.style.color = txt; else span.className += ' mlist__team--pill';
+      span.className += ' mlist__team--pill';
     } else el.className += ' is-neutral';
     el.appendChild(span);
     return el;
