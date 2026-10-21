@@ -1,7 +1,7 @@
 // URL du Google Sheet publié en CSV (Fichier > Partager > Publier sur le web > CSV).
 // Tant que la valeur contient "REMPLACER" (ou si le chargement échoue), le message « Programme à venir, appelez-nous » est affiché.
 // Pour tester avec un faux programme : ajouter ?demo=1 à l’URL (jamais montré au public sans ce paramètre).
-var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZbGmvgfvKbp20_jOTr84_171LJNhIWo6N6pVOVn847v9BpAOv7b-ZMMrBGGCf1z16roSu5lZq0S8m/pub?gid=1710696598&single=true&output=csv';
+var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1PfIjnpxyIc2DXrZV7oFxkQfrHndJWJg_vLndx-q7QuE/gviz/tq?tqx=out:csv&gid=0';
 
 var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[660,1470],"3":[660,1470],"4":[660,1470],"5":[660,1590],"6":[660,1590]},"kitchen":{"0":[[660,900],[1110,1320]],"1":[[720,900],[1140,1320]],"2":[[720,900],[1140,1320]],"3":[[720,900],[1140,1320]],"4":[[720,900],[1140,1320]],"5":[[720,900],[1140,1320]],"6":[[720,900],[1140,1320]]},"matches":true,"extras":[{"day":1,"text":"Quiz ce soir, <b>20h30</b>"},{"day":5,"text":"Live ce soir"}],"kitchenTodayLabel":true};
 
