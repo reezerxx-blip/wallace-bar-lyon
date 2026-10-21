@@ -1,9 +1,12 @@
-// URL du Google Sheet publié en CSV (Fichier > Partager > Publier sur le web > CSV).
-// Tant que la valeur contient "REMPLACER" (ou si le chargement échoue), le message « Programme à venir, appelez-nous » est affiché.
+// Programme des matchs : un seul Google Sheet commun aux vitrines Bar et Pub.
+// Test actuel : Sheet partagé par lien, lu via l’adresse gviz (format CSV).
+// Production : Fichier > Partager > Publier sur le web > CSV, puis coller le lien ici (voir GUIDE-MATCHS.md).
+// Valeur contenant "REMPLACER" : « Programme à venir, appelez-nous ». Échec du chargement : « Programme momentanément indisponible ».
 // Pour tester avec un faux programme : ajouter ?demo=1 à l’URL (jamais montré au public sans ce paramètre).
 var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1PfIjnpxyIc2DXrZV7oFxkQfrHndJWJg_vLndx-q7QuE/gviz/tq?tqx=out:csv&gid=0';
 
-var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[660,1470],"3":[660,1470],"4":[660,1470],"5":[660,1590],"6":[660,1590]},"kitchen":{"0":[[660,900],[1110,1320]],"1":[[720,900],[1140,1320]],"2":[[720,900],[1140,1320]],"3":[[720,900],[1140,1320]],"4":[[720,900],[1140,1320]],"5":[[720,900],[1140,1320]],"6":[[720,900],[1140,1320]]},"matches":true,"extras":[{"day":1,"text":"Quiz ce soir, <b>20h30</b>"},{"day":5,"text":"Live ce soir"}],"kitchenTodayLabel":true};
+// hours / kitchen : null = horaires à confirmer (statut neutre) ; [] = fermé ce jour-là.
+var CONFIG = {"name":"Wallace Bar","phone":"04 72 00 23 91","tel":"+33472002391","hours":{"0":[660,1470],"1":[660,1470],"2":[660,1470],"3":[660,1470],"4":[660,1470],"5":[660,1590],"6":[660,1590]},"kitchen":{"0":[[660,900],[1110,1320]],"1":[[720,900],[1140,1320]],"2":[[720,900],[1140,1320]],"3":[[720,900],[1140,1320]],"4":[[720,900],[1140,1320]],"5":[[720,900],[1140,1320]],"6":[[720,900],[1140,1320]]},"matches":true,"extras":[{"day":1,"text":"Quiz ce soir, <b>20h</b>"}],"kitchenTodayLabel":true};
 
 (function () {
   'use strict';
@@ -11,7 +14,7 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
   var DAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
   var NAMES = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
   var MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
-  var tonightCount = null; // null = programme pas encore chargé
+  var matchList = null; // null = programme pas encore chargé (ou indisponible)
 
   /* ---------- Heure de Paris ---------- */
   function parisNow() {
@@ -30,42 +33,62 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
     var m = mins % 1440, h = Math.floor(m / 60), mm = m % 60;
     return (h < 10 ? '0' : '') + h + 'h' + (mm ? (mm < 10 ? '0' : '') + mm : '');
   }
+  function hm(h, mi) { return (h < 10 ? '0' : '') + h + 'h' + (mi ? (mi < 10 ? '0' : '') + mi : ''); }
   function setText(el, t) { if (el.textContent !== t) el.textContent = t; }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function known(x) { return x !== null && x !== undefined; }
+  function openDay(x) { return !!(x && x.length === 2); }
 
   /* ---------- Statut ouvert / fermé ---------- */
   function nextOpenText(H, now) {
-    var t = H[now.day], n = H[(now.day + 1) % 7];
-    if (t && t[0] > now.min) return 'ouvre à ' + fmt(t[0]);
-    if (n) return 'ouvre à ' + fmt(n[0]);
-    return 'horaires de ' + NAMES[(now.day + 1) % 7] + ' à confirmer';
+    var t = H[now.day], i, d, x;
+    if (openDay(t) && t[0] > now.min) return 'ouvre à ' + fmt(t[0]);
+    for (i = 1; i <= 7; i++) {
+      d = (now.day + i) % 7; x = H[d];
+      if (!known(x)) return 'horaires de ' + NAMES[d] + ' à confirmer';
+      if (openDay(x)) return 'ouvre ' + (i === 1 ? 'demain' : NAMES[d]) + ' à ' + fmt(x[0]);
+    }
+    return 'réouverture à confirmer';
   }
 
   // Renvoie null quand il n’y a rien à dire (cuisine inconnue après minuit).
   function kitchenLine(day, min, afterMidnight) {
     var K = CONFIG.kitchen, slots = K[day], i, nx;
     if (!afterMidnight) {
-      if (!slots) return 'Cuisine : horaires à confirmer';
+      if (!known(slots)) return 'Cuisine : horaires à confirmer';
+      if (!slots.length) return 'Cuisine fermée aujourd’hui';
       for (i = 0; i < slots.length; i++) if (min >= slots[i][0] && min < slots[i][1]) return 'Cuisine ouverte jusqu’à ' + fmt(slots[i][1]);
       for (i = 0; i < slots.length; i++) if (min < slots[i][0]) return 'Cuisine fermée, reprend à ' + fmt(slots[i][0]);
       nx = K[(day + 1) % 7];
-      return nx ? 'Cuisine fermée, rouvre demain à ' + fmt(nx[0][0]) : 'Cuisine fermée, horaires de demain à confirmer';
+      if (!known(nx)) return 'Cuisine fermée, horaires de demain à confirmer';
+      return nx.length ? 'Cuisine fermée, rouvre demain à ' + fmt(nx[0][0]) : 'Cuisine fermée, fermée aussi demain';
     }
-    return slots ? 'Cuisine fermée, ouvre à ' + fmt(slots[0][0]) : null;
+    return slots && slots.length ? 'Cuisine fermée, ouvre à ' + fmt(slots[0][0]) : null;
   }
 
-  // Jours à null dans CONFIG.hours = horaires à confirmer : statut neutre, jamais « ouvert » ni « fermé » inventé.
+  function matchLines(now) {
+    if (!CONFIG.matches || !matchList) return [];
+    var today = split(matchList, now).today, out;
+    out = today.slice(0, 3).map(function (m) {
+      var t = m.teams && m.teams.length ? m.teams.join(' – ') : m.what;
+      return '<a href="#matchs">' + hm(m.h, m.mi) + ' ' + esc(t) + (m.screen ? ' · ' + esc(m.screen) : '') + '</a>';
+    });
+    if (today.length > 3) out.push('<a href="#matchs">+ ' + (today.length - 3) + (today.length - 3 > 1 ? ' autres matchs' : ' autre match') + '</a>');
+    return out;
+  }
+
   function update() {
     var H = CONFIG.hours, now = parisNow(), prev = (now.day + 6) % 7, tH = H[now.day], pH = H[prev];
     var open = false, after = false, unknown = false, service = now.day, statusText, barLine;
-    if (pH && now.min < pH[1] - 1440) { open = true; after = true; service = prev; }
-    else if (tH && now.min >= tH[0] && now.min < tH[1]) { open = true; }
-    else if (!tH || (!pH && now.min < 360)) { unknown = true; }
+    if (openDay(pH) && now.min < pH[1] - 1440) { open = true; after = true; service = prev; }
+    else if (openDay(tH) && now.min >= tH[0] && now.min < tH[1]) { open = true; }
+    else if (!known(tH) || (!known(pH) && now.min < 360)) { unknown = true; }
     if (open) {
       statusText = 'Ouvert jusqu’à ' + fmt(H[service][1]);
       barLine = 'Bar ouvert jusqu’à ' + fmt(H[service][1]);
     } else if (unknown) {
-      statusText = 'Horaires du ' + NAMES[tH ? prev : now.day] + ' à confirmer';
-      barLine = 'Bar : horaires du ' + NAMES[tH ? prev : now.day] + ' à confirmer, appelez-nous';
+      statusText = 'Horaires du ' + NAMES[known(tH) ? prev : now.day] + ' à confirmer';
+      barLine = 'Bar : horaires du ' + NAMES[known(tH) ? prev : now.day] + ' à confirmer, appelez-nous';
     } else {
       statusText = 'Fermé, ' + nextOpenText(H, now);
       barLine = 'Bar fermé, ' + nextOpenText(H, now);
@@ -78,16 +101,16 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
 
     var list = document.getElementById('today-lines');
     if (list) {
-      var lines = [barLine];
-      var kl = CONFIG.kitchen ? kitchenLine(now.day, now.min, after) : null;
+      var lines = [barLine], K = CONFIG.kitchen;
+      var kl = K ? kitchenLine(now.day, now.min, after) : null;
       if (kl) lines.push(kl);
       if (!after) {
         CONFIG.extras.forEach(function (x) {
           if (x.day === now.day && (!x.nth || Math.ceil(now.d / 7) === x.nth)) lines.push(x.text);
         });
-        if (CONFIG.kitchen && now.day >= 1 && now.day <= 5 && now.min < 900) lines.push('Plat du jour au déjeuner');
+        if (K && now.day >= 1 && now.day <= 5 && openDay(H[now.day]) && K[now.day] && K[now.day].length && now.min < K[now.day][0][1]) lines.push('Plat du jour au déjeuner');
       }
-      if (CONFIG.matches && tonightCount) lines.push(tonightCount + (tonightCount > 1 ? ' matchs ce soir' : ' match ce soir'));
+      lines = lines.concat(matchLines(now));
       var html = lines.map(function (l) { return '<li>' + l + '</li>'; }).join('');
       if (list.getAttribute('data-html') !== html) { list.innerHTML = html; list.setAttribute('data-html', html); }
       var title = document.getElementById('today-title');
@@ -96,8 +119,16 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
     var rows = document.querySelectorAll('tr[data-day]');
     for (var i = 0; i < rows.length; i++) rows[i].setAttribute('data-today', String(+rows[i].getAttribute('data-day') === service));
   }
-  update();
-  setInterval(update, 60000);
+
+  /* ---------- Navigation : fondu à droite tant qu'il reste des liens à faire défiler ---------- */
+  var nav = document.querySelector('.top__nav');
+  function navFade() {
+    if (!nav) return;
+    var fit = nav.scrollWidth <= nav.clientWidth + 1;
+    nav.classList.toggle('is-fit', fit);
+    nav.classList.toggle('is-end', !fit && nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 2);
+  }
+  if (nav) { nav.addEventListener('scroll', navFade, { passive: true }); window.addEventListener('resize', navFade); navFade(); }
 
   /* ---------- Navigation active ---------- */
   var links = document.querySelectorAll('.top__nav a');
@@ -111,7 +142,7 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
     for (id in map) { var sec = document.getElementById(id); if (sec) io.observe(sec); }
   }
 
-  /* ---------- Matchs (Google Sheet publié en CSV) ---------- */
+  /* ---------- Matchs (Google Sheet en CSV) ---------- */
   // Parseur CSV : guillemets, guillemets doublés, virgules et retours à la ligne dans les champs.
   function parseCSV(text) {
     var rows = [], row = [], cur = '', q = false, i, c;
@@ -187,30 +218,15 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
     return { today: today, next: next.slice(0, 12) };
   }
 
-  // Moitié de carte : couleurs et lisibilité viennent uniquement du dictionnaire equipes.js.
+  // Moitié de carte : les couleurs viennent uniquement du dictionnaire equipes.js ; le nom est toujours sur une pastille sombre.
   function half(name, full) {
-    var el = document.createElement('div'), span = document.createElement('span'), T = window.WallaceTeams, colors = T ? T.find(name) : null, txt;
+    var el = document.createElement('div'), span = document.createElement('span'), T = window.WallaceTeams, colors = T ? T.find(name) : null;
     el.className = 'mlist__half' + (full ? ' mlist__half--full' : '');
+    el.setAttribute('aria-hidden', 'true');
     span.className = 'mlist__team';
     span.textContent = name;
     if (colors) {
       el.style.background = T.gradient(colors);
-      txt = T.textFor(colors);
-      span.className += ' mlist__team--pill';
-    } else el.className += ' is-neutral';
-    el.appendChild(span);
-    return el;
-  }
-
-  // Moitié de carte : couleurs et lisibilité viennent uniquement du dictionnaire equipes.js.
-  function half(name, full) {
-    var el = document.createElement('div'), span = document.createElement('span'), T = window.WallaceTeams, colors = T ? T.find(name) : null, txt;
-    el.className = 'mlist__half' + (full ? ' mlist__half--full' : '');
-    span.className = 'mlist__team';
-    span.textContent = name;
-    if (colors) {
-      el.style.background = T.gradient(colors);
-      txt = T.textFor(colors);
       span.className += ' mlist__team--pill';
     } else el.className += ' is-neutral';
     el.appendChild(span);
@@ -218,42 +234,63 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
   }
 
   function card(m, tonight) {
-    var li = document.createElement('li'), meta = document.createElement('div'), w = document.createElement('p'), s, teams = m.teams && m.teams.length ? m.teams : [m.what];
+    var li = document.createElement('li'), meta = document.createElement('div'), w = document.createElement('p'), sr = document.createElement('span'), s, teams = m.teams && m.teams.length ? m.teams : [m.what], label;
+    var time = hm(m.h, m.mi), dateTxt = '';
     meta.className = 'mlist__meta';
+    meta.setAttribute('aria-hidden', 'true');
     w.className = 'mlist__when';
-    w.textContent = (m.h < 10 ? '0' : '') + m.h + 'h' + (m.mi ? (m.mi < 10 ? '0' : '') + m.mi : '');
+    w.textContent = time;
     if (!tonight) {
       var dt = new Date(Date.UTC(m.y, m.mo - 1, m.d)), small = document.createElement('small');
-      small.textContent = NAMES[dt.getUTCDay()] + ' ' + m.d + ' ' + MONTHS[m.mo - 1];
+      dateTxt = NAMES[dt.getUTCDay()] + ' ' + m.d + ' ' + MONTHS[m.mo - 1];
+      small.textContent = dateTxt;
       w.appendChild(small);
     }
     meta.appendChild(w);
     if (m.screen) { s = document.createElement('span'); s.className = 'mlist__screen'; s.textContent = m.screen; meta.appendChild(s); }
+    label = (dateTxt ? dateTxt + ', ' : '') + time + ', ' + teams.join(' contre ') + (m.screen ? ', ' + m.screen.toLowerCase() : '');
+    sr.className = 'sr';
+    sr.textContent = label;
+    li.appendChild(sr);
     li.appendChild(meta);
     li.appendChild(half(teams[0], teams.length < 2));
     if (teams.length > 1) li.appendChild(half(teams[1], false));
     return li;
   }
 
+  function els() {
+    return { t: document.getElementById('matchs-today'), n: document.getElementById('matchs-next'), box: document.getElementById('matchs-box'), empty: document.getElementById('matchs-empty'), note: document.getElementById('matchs-demo') };
+  }
+  function telLink() { return '<a href="tel:' + CONFIG.tel + '">' + CONFIG.phone + '</a>'; }
+
   function render(list, isDemo) {
-    var now = parisNow(), parts = split(list, now);
-    var tEl = document.getElementById('matchs-today'), nEl = document.getElementById('matchs-next');
-    var box = document.getElementById('matchs-box'), empty = document.getElementById('matchs-empty'), note = document.getElementById('matchs-demo');
-    if (!tEl || !nEl) return parts;
-    tEl.innerHTML = ''; nEl.innerHTML = '';
-    tEl.className = 'mlist mlist--tonight';
-    parts.today.forEach(function (m) { tEl.appendChild(card(m, true)); });
-    parts.next.forEach(function (m) { nEl.appendChild(card(m, false)); });
-    [[tEl, parts.today, 'Pas de match ce soir.'], [nEl, parts.next, 'Rien d’annoncé pour l’instant.']].forEach(function (x) {
+    var now = parisNow(), parts = split(list, now), E = els();
+    if (!E.t || !E.n) return parts;
+    E.t.innerHTML = ''; E.n.innerHTML = '';
+    E.t.className = 'mlist mlist--tonight'; E.n.className = 'mlist';
+    parts.today.forEach(function (m) { E.t.appendChild(card(m, true)); });
+    parts.next.forEach(function (m) { E.n.appendChild(card(m, false)); });
+    [[E.t, parts.today, 'Pas de match ce soir.'], [E.n, parts.next, 'Rien d’annoncé pour l’instant.']].forEach(function (x) {
       if (!x[1].length) { var li = document.createElement('li'); li.className = 'mlist__none'; li.textContent = x[2]; x[0].appendChild(li); x[0].classList.add('is-empty'); }
     });
     var none = !parts.today.length && !parts.next.length;
-    if (box) box.hidden = none;
-    if (empty) empty.hidden = !none;
-    if (note) note.hidden = !(isDemo && !none);
-    tonightCount = parts.today.length;
+    if (E.box) { E.box.hidden = none; E.box.removeAttribute('aria-busy'); }
+    if (E.empty) { E.empty.innerHTML = 'Programme à venir, appelez-nous au ' + telLink() + '.'; E.empty.hidden = !none; }
+    if (E.note) E.note.hidden = !(isDemo && !none);
+    matchList = list;
     update();
     return parts;
+  }
+
+  // Sheet injoignable (réseau, blocage, délai dépassé) : un seul message, distinct du programme vide.
+  function renderError() {
+    var E = els();
+    if (E.box) { E.box.hidden = true; E.box.removeAttribute('aria-busy'); }
+    if (E.empty) { E.empty.innerHTML = 'Programme momentanément indisponible. Appelez le ' + telLink() + ' pour savoir quel match passe ce soir.'; E.empty.hidden = false; }
+    if (E.note) E.note.hidden = true;
+    matchList = null;
+    update();
+    return null;
   }
 
   // ?demo=1 : faux programme pour les tests du développeur, jamais affiché au public sans ce paramètre.
@@ -264,13 +301,16 @@ var CONFIG = {"name":"Wallace Bar","hours":{"0":[660,1470],"1":[660,1470],"2":[6
     if (DEMO) { return Promise.resolve(render(demo(parisNow()), true)); }
     if (placeholder || typeof fetch !== 'function') { return Promise.resolve(render([], false)); }
     var ctl = typeof AbortController === 'function' ? new AbortController() : null;
-    var timer = ctl ? setTimeout(function () { ctl.abort(); }, 7000) : null;
+    var timer = ctl ? setTimeout(function () { ctl.abort(); }, 4000) : null;
     return fetch(url, { cache: 'no-store', signal: ctl ? ctl.signal : undefined })
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
       .then(function (t) { return render(toMatches(parseCSV(t)), false); })
-      .catch(function () { return render([], false); })
+      .catch(function () { return renderError(); })
       .then(function (p) { if (timer) clearTimeout(timer); return p; });
   }
+
+  update();
+  setInterval(update, 60000);
 
   window.WallaceMatches = { parseCSV: parseCSV, toMatches: toMatches, split: split, render: render, load: loadMatches };
   if (CONFIG.matches) loadMatches(SHEET_CSV_URL);

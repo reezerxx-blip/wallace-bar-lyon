@@ -1,3 +1,4 @@
+@font-face{font-family:"Fraunces";font-weight:600;font-style:normal;font-display:swap;src:url("fonts/fraunces-600.woff2") format("woff2")}
 @font-face{font-family:"Barlow Condensed";font-weight:700;font-style:normal;font-display:swap;src:url("fonts/barlow-condensed-700.woff2") format("woff2")}
 @font-face{font-family:"Barlow Condensed";font-weight:800;font-style:normal;font-display:swap;src:url("fonts/barlow-condensed-800.woff2") format("woff2")}
 @font-face{font-family:"Public Sans";font-weight:400 700;font-style:normal;font-display:swap;src:url("fonts/public-sans.woff2") format("woff2")}
@@ -234,3 +235,67 @@ tr[data-today="true"] th { color: var(--hi); }
 .lp ul { list-style: disc; padding-left: var(--s4); }
 .lp a { text-underline-offset: 3px; }
 .todo { background: var(--hi); color: var(--ink); padding: 0 var(--s1); }
+
+/* ===== Corrections de l'audit (21/10/2026) ===== */
+/* P0-1 : l'attribut hidden l'emporte toujours (les blocs en display:grid l'écrasaient) */
+[hidden] { display: none !important; }
+
+/* P2-6 : tokens */
+:root { --paper-hi: #FAF6EC; --gutter: 16px; }
+.btn--paper:hover { background: var(--paper-hi); }
+.poster { background: var(--paper-hi); }
+.strip { gap: var(--s1); }
+
+/* P1-3 : en-tête mobile */
+.status { white-space: nowrap; font-size: 13px; padding: 0 var(--s2); }
+.top__nav { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.top__nav.is-end, .top__nav.is-fit { -webkit-mask-image: none; mask-image: none; }
+@media (max-width: 399px) { .top__nav a { padding: 0 12px; font-size: 18px; } }
+
+/* P1-9 : adresse sous l'accroche */
+.hero__addr { margin: calc(var(--s3) * -1) 0 var(--s4); font-weight: 600; color: var(--paper-dim); }
+
+/* P1-4 : étiquettes lisibles */
+.tag { font-size: 13px; padding: var(--s1) var(--s2); }
+
+/* P1-13 : air entre étiquettes et photo */
+.dishes + .feature { margin-top: var(--s5); }
+
+/* P1-18 : liens croisés du pied de page */
+.foot__group { display: flex; flex-wrap: wrap; gap: 0 var(--s3); align-items: center; }
+.foot__group span { margin-right: var(--s1); }
+
+/* P1-2 : le dock remplace les boutons du héros sous 900 px (mesuré : boutons sous le dock à 375x812) */
+@media (max-width: 899px) {
+  html { scroll-padding-bottom: 72px; }
+  .hero__cta { display: none; }
+  .hero__lede { margin-bottom: var(--s4); }
+}
+
+/* P2-5 : tablette */
+@media (min-width: 768px) { :root { --gutter: 24px; } }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .events { grid-template-columns: 1fr 1fr; }
+  .matchs { grid-template-columns: 1fr; }
+}
+@media (min-width: 900px) { .top__nav { -webkit-mask-image: none; mask-image: none; } }
+/* P2-1 : Snug feutré, serif sur h1/h2 seulement (boutons, dock, pastille et h3 restent en condensée) */
+:root { --font-serif: "Fraunces", Georgia, "Times New Roman", serif; }
+h1, h2 { font-family: var(--font-serif); font-weight: 600; text-transform: none; letter-spacing: -.01em; }
+h1 { font-size: clamp(60px, 16vw, 128px); line-height: .95; }
+h1 b { background: none; color: var(--hi); font-style: italic; padding: 0; }
+.sec { padding: 96px 0; }
+
+/* P2-2 : panneaux sombres remplis par le bas */
+.duo__text { display: flex; flex-direction: column; justify-content: flex-end; }
+@media (min-width: 768px) { .duo__text { padding: var(--s6); } }
+
+/* P1-8 : photo portrait recadrée en bandeau */
+.feature--gin img { object-position: 50% 35%; }
+
+/* P2-3 : casseur de grille, phrase qui chevauche la photo de l'ambiance */
+.quote { position: relative; z-index: 2; margin: -64px 0 0 auto; max-width: 16ch; background: var(--accent); color: var(--on-accent); padding: var(--s4); font: italic 600 clamp(32px, 5vw, 56px)/1.1 var(--font-serif); }
+@media (min-width: 900px) { .quote { margin-right: var(--s6); } }
+
+/* En-tête étroit : logo texte empilé plutôt que coupé au hasard (pastille d'état sur une ligne) */
+@media (max-width: 399px) { .mark { flex-direction: column; align-items: flex-start; gap: 0; } .mark i { white-space: nowrap; margin-top: 2px; } }
