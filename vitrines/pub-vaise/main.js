@@ -1,7 +1,7 @@
 // URL du Google Sheet publié en CSV (Fichier > Partager > Publier sur le web > CSV).
 // Tant que la valeur contient "REMPLACER" (ou si le chargement échoue), le message « Programme à venir, appelez-nous » est affiché.
 // Pour tester avec un faux programme : ajouter ?demo=1 à l’URL (jamais montré au public sans ce paramètre).
-var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/REMPLACER/pub?output=csv';
+var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZbGmvgfvKbp20_jOTr84_171LJNhIWo6N6pVOVn847v9BpAOv7b-ZMMrBGGCf1z16roSu5lZq0S8m/pub?gid=1710696598&single=true&output=csv';
 
 var CONFIG = {"name":"Wallace Pub Vaise","hours":{"0":null,"1":[600,1500],"2":[600,1500],"3":[600,1500],"4":[600,1500],"5":[600,1500],"6":[600,1500]},"kitchen":{"0":null,"1":[[720,900],[1140,1320]],"2":[[720,900],[1140,1320]],"3":[[720,900],[1140,1320]],"4":[[720,900],[1140,1320]],"5":[[720,900],[1140,1320]],"6":[[720,900],[1140,1320]]},"matches":true,"extras":[{"day":1,"nth":1,"text":"Musique irlandaise ce soir"}],"kitchenTodayLabel":true};
 
