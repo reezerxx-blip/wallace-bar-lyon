@@ -152,12 +152,19 @@ h1 b { display: inline-block; background: var(--accent); color: var(--on-accent)
 .matchs { display: grid; gap: var(--s5); }
 .matchs h3 { color: var(--hi); font-size: clamp(36px, 5vw, 48px); margin-bottom: var(--s3); }
 .mlist { display: grid; gap: var(--s2); }
-.mlist li { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s3); background: var(--green); border-left: 6px solid var(--hi); padding: var(--s3); }
-.mlist--tonight li { border-left-color: var(--accent); background: var(--green-deep); }
+.mlist li { display: grid; grid-template-columns: 1fr 1fr; background: var(--green); overflow: hidden; min-width: 0; }
+.mlist--tonight li { background: var(--green-deep); }
+.mlist__meta { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: var(--s3); padding: var(--s2) var(--s3); border-left: 6px solid var(--hi); background: var(--green); }
+.mlist--tonight .mlist__meta { border-left-color: var(--accent); background: var(--green-deep); }
 .mlist__when { font: 800 28px/1 var(--font-display); text-transform: uppercase; min-width: 4.5ch; }
 .mlist__when small { display: block; font: 600 var(--fs-s)/1.2 var(--font-body); color: var(--paper-dim); text-transform: none; margin-top: 2px; }
-.mlist__what { font: 700 clamp(20px, 3vw, 26px)/1.15 var(--font-display); text-transform: uppercase; }
-.mlist__screen { font: 700 12px/1 var(--font-body); text-transform: uppercase; letter-spacing: .08em; background: var(--paper); color: var(--ink); padding: 6px 8px; }
+.mlist__half { display: flex; align-items: center; justify-content: center; text-align: center; min-width: 0; min-height: 88px; padding: var(--s3) var(--s2); color: var(--paper); }
+.mlist__half--full { grid-column: 1 / -1; }
+.mlist__half.is-neutral { background: var(--green); }
+.mlist--tonight .mlist__half.is-neutral { background: var(--green-deep); }
+.mlist__team { font: 700 clamp(18px, 2.6vw, 24px)/1.15 var(--font-display); text-transform: uppercase; overflow-wrap: anywhere; max-width: 100%; }
+.mlist__team--pill { background: rgba(20, 24, 26, .9); color: #fff; border: 1px solid rgba(255, 255, 255, .6); padding: 6px 10px; }
+.mlist__screen { font: 700 12px/1 var(--font-body); text-transform: uppercase; letter-spacing: .08em; background: var(--paper); color: var(--ink); padding: 6px 8px; white-space: nowrap; }
 .mlist__none { color: var(--paper-dim); padding: var(--s3) 0; }
 .matchs__empty { font-size: var(--fs-l); max-width: 44ch; }
 

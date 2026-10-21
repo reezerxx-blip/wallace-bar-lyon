@@ -136,11 +136,18 @@ var CONFIG = {"name":"Wallace Pub Vaise","hours":{"0":null,"1":[600,1500],"2":[6
 
   function norm(s) { return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim(); }
 
-  // Colonnes attendues : date, heure, affiche, écran. Date : AAAA-MM-JJ ou JJ/MM/AAAA. Heure : 20:45 ou 20h45.
+  // Colonnes : date, heure, equipe1, equipe2, ecran (toute autre colonne, comme jour, est ignorée).
+  // Ancien format toujours accepté : colonne affiche « A - B » ou « A vs B ».
+  // Date : AAAA-MM-JJ ou JJ/MM/AAAA. Heure : 20:45 ou 20h45.
+  function splitAffiche(s) {
+    var p = s.split(/\s+(?:-|–|—|vs\.?|v)\s+/i);
+    return p.length === 2 && p[0].trim() && p[1].trim() ? [p[0].trim(), p[1].trim()] : null;
+  }
+
   function toMatches(rows) {
     if (!rows.length) return [];
-    var head = rows[0].map(norm), ix = { date: head.indexOf('date'), heure: head.indexOf('heure'), affiche: head.indexOf('affiche'), ecran: head.indexOf('ecran') };
-    if (ix.date < 0 || ix.heure < 0 || ix.affiche < 0) return [];
+    var head = rows[0].map(norm), ix = { date: head.indexOf('date'), heure: head.indexOf('heure'), e1: head.indexOf('equipe1'), e2: head.indexOf('equipe2'), affiche: head.indexOf('affiche'), ecran: head.indexOf('ecran') };
+    if (ix.date < 0 || ix.heure < 0 || (ix.e1 < 0 && ix.e2 < 0 && ix.affiche < 0)) return [];
     var out = [];
     rows.slice(1).forEach(function (r) {
       var ds = (r[ix.date] || '').trim(), hs = (r[ix.heure] || '').trim(), m, y, mo, d, h, mi;
@@ -149,9 +156,13 @@ var CONFIG = {"name":"Wallace Pub Vaise","hours":{"0":null,"1":[600,1500],"2":[6
       else return;
       if (!(m = hs.match(/^(\d{1,2})\s*[:hH]\s*(\d{0,2})$/))) return;
       h = +m[1]; mi = m[2] ? +m[2] : 0;
-      var what = (r[ix.affiche] || '').trim();
-      if (!what || mo < 1 || mo > 12 || d < 1 || d > 31 || h > 29 || mi > 59) return;
-      out.push({ y: y, mo: mo, d: d, h: h, mi: mi, what: what, screen: ix.ecran >= 0 ? (r[ix.ecran] || '').trim() : '' });
+      var a = ix.e1 >= 0 ? (r[ix.e1] || '').trim() : '', b = ix.e2 >= 0 ? (r[ix.e2] || '').trim() : '', teams, sp;
+      if (a && b) teams = [a, b];
+      else if (a || b) teams = [a || b];
+      else if (ix.affiche >= 0 && (sp = (r[ix.affiche] || '').trim())) teams = splitAffiche(sp) || [sp];
+      else return;
+      if (mo < 1 || mo > 12 || d < 1 || d > 31 || h > 29 || mi > 59) return;
+      out.push({ y: y, mo: mo, d: d, h: h, mi: mi, teams: teams, what: teams.join(' - '), screen: ix.ecran >= 0 ? (r[ix.ecran] || '').trim() : '' });
     });
     return out;
   }
@@ -160,9 +171,9 @@ var CONFIG = {"name":"Wallace Pub Vaise","hours":{"0":null,"1":[600,1500],"2":[6
 
   function demo(now) {
     var base = Date.UTC(now.y, now.mo - 1, now.d), list = [];
-    [[0, 21, 0, 'Match de démonstration A - B', 'Écran 1'], [0, 21, 0, 'Match de démonstration C - D', 'Écran 2'], [1, 20, 45, 'Match de démonstration E - F', 'Écran 1'], [3, 21, 0, 'Match de démonstration G - H', 'Écran 1'], [6, 18, 30, 'Match de démonstration I - J', 'Les deux écrans']].forEach(function (x) {
+    [[0, 21, 0, 'France', 'Marseille', 'Écran 1'], [0, 21, 0, 'Lyon', 'PSG', 'Écran 2'], [1, 20, 45, 'Irlande', 'Écosse', 'Écran 1'], [3, 21, 0, 'Équipe inconnue', 'Italie', 'Écran 1'], [6, 18, 30, 'Toulouse', 'Racing 92', 'Les deux écrans']].forEach(function (x) {
       var t = new Date(base + x[0] * 86400000);
-      list.push({ y: t.getUTCFullYear(), mo: t.getUTCMonth() + 1, d: t.getUTCDate(), h: x[1], mi: x[2], what: x[3], screen: x[4] });
+      list.push({ y: t.getUTCFullYear(), mo: t.getUTCMonth() + 1, d: t.getUTCDate(), h: x[1], mi: x[2], teams: [x[3], x[4]], what: x[3] + ' - ' + x[4], screen: x[5] });
     });
     return list;
   }
@@ -176,8 +187,24 @@ var CONFIG = {"name":"Wallace Pub Vaise","hours":{"0":null,"1":[600,1500],"2":[6
     return { today: today, next: next.slice(0, 12) };
   }
 
+  // Moitié de carte : couleurs et lisibilité viennent uniquement du dictionnaire equipes.js.
+  function half(name, full) {
+    var el = document.createElement('div'), span = document.createElement('span'), T = window.WallaceTeams, colors = T ? T.find(name) : null, txt;
+    el.className = 'mlist__half' + (full ? ' mlist__half--full' : '');
+    span.className = 'mlist__team';
+    span.textContent = name;
+    if (colors) {
+      el.style.background = T.gradient(colors);
+      txt = T.textFor(colors);
+      if (txt) el.style.color = txt; else span.className += ' mlist__team--pill';
+    } else el.className += ' is-neutral';
+    el.appendChild(span);
+    return el;
+  }
+
   function card(m, tonight) {
-    var li = document.createElement('li'), w = document.createElement('p'), t = document.createElement('p'), s;
+    var li = document.createElement('li'), meta = document.createElement('div'), w = document.createElement('p'), s, teams = m.teams && m.teams.length ? m.teams : [m.what];
+    meta.className = 'mlist__meta';
     w.className = 'mlist__when';
     w.textContent = (m.h < 10 ? '0' : '') + m.h + 'h' + (m.mi ? (m.mi < 10 ? '0' : '') + m.mi : '');
     if (!tonight) {
@@ -185,10 +212,11 @@ var CONFIG = {"name":"Wallace Pub Vaise","hours":{"0":null,"1":[600,1500],"2":[6
       small.textContent = NAMES[dt.getUTCDay()] + ' ' + m.d + ' ' + MONTHS[m.mo - 1];
       w.appendChild(small);
     }
-    t.className = 'mlist__what';
-    t.textContent = m.what;
-    li.appendChild(w); li.appendChild(t);
-    if (m.screen) { s = document.createElement('span'); s.className = 'mlist__screen'; s.textContent = m.screen; li.appendChild(s); }
+    meta.appendChild(w);
+    if (m.screen) { s = document.createElement('span'); s.className = 'mlist__screen'; s.textContent = m.screen; meta.appendChild(s); }
+    li.appendChild(meta);
+    li.appendChild(half(teams[0], teams.length < 2));
+    if (teams.length > 1) li.appendChild(half(teams[1], false));
     return li;
   }
 
@@ -229,6 +257,6 @@ var CONFIG = {"name":"Wallace Pub Vaise","hours":{"0":null,"1":[600,1500],"2":[6
       .then(function (p) { if (timer) clearTimeout(timer); return p; });
   }
 
-  window.WallaceMatches = { parseCSV: parseCSV, toMatches: toMatches, split: split, load: loadMatches };
+  window.WallaceMatches = { parseCSV: parseCSV, toMatches: toMatches, split: split, render: render, load: loadMatches };
   if (CONFIG.matches) loadMatches(SHEET_CSV_URL);
 })();

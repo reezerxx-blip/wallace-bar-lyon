@@ -1,6 +1,6 @@
-date,heure,affiche,ecran
-2026-10-21,21:00,Test Ce soir - Démonstration,Écran 1
-2026-10-22,20:45,Test Jeudi - Démonstration,Les deux
-2026-10-24,18:30,"Test Samedi, avec virgule - Démonstration",Écran 2
-2026-10-25,21:00,Test Dimanche - Démonstration,Écran 1
-2026-10-29,19:00,Test Semaine prochaine - Démonstration,Écran 2
+date,heure,equipe1,equipe2,ecran,jour
+2026-11-14,21:00,France,Marseille,Écran 1,
+2026-11-14,21:00,Lyon,PSG,Écran 2,
+2026-11-15,16:00,Irlande,Écosse,Les deux,
+2026-11-21,18:30,Toulouse,Racing 92,Écran 1,
+2026-11-22,20:45,"Équipe, inconnue",Italie,Écran 2,
